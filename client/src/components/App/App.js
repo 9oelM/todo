@@ -1,13 +1,28 @@
+// External
 import React from 'react'
-import './App.sass'
-import TodoList from '../TodoList/TodoList'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Grid from '@material-ui/core/Grid'
 
-function App() {
+// Internal
+import TodoList from '../TodoList/TodoList'
+import './App.scss'
+
+const App = () => {
     return (
-        <div className="App">
-            <TodoList test={'test'} />
-        </div>
+        <>
+            <CssBaseline />
+            <div className="App">
+                <Grid
+                    container
+                    spacing={24}
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                >
+                    <TodoList />
+                </Grid>
+            </div>
+        </>
     )
 }
-
 export default App

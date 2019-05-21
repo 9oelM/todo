@@ -3,13 +3,13 @@ import React from 'react'
 import { PropTypes } from 'prop-types'
 
 // Internal
-import './TodoPreview.sass'
+import './TodoPreview.scss'
 
 const TodoPreview = ({ title, content, due, priority, done }) => (
     <>
         <div>{title}</div>
         <div>{content}</div>
-        <div>{due}</div>
+        <div>{due.toString()}</div>
         <div>{priority}</div>
         <div>{done}</div>
     </>
