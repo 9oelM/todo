@@ -1,6 +1,33 @@
 # todo
 todo front &amp; back
 
+## Stacks
+### Client
+- React (Material-UI)
+- Redux?
+- Eslint
+- Webpack
+- Husky
+- Jest, Enzyme
+
+### Server
+- Node
+- MongoDB
+
+## How to install & build
+- Make sure you have installed latest version of `node` and `yarn`
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash # install nvm 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+nvm install node
+
+npm install -g yarn
+```
+
 ## 요구사항
 ● 기능 요구사항
 - [ ] 새로운 TODO(제목과 내용)를 작성할 수 있다.
