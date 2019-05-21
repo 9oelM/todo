@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
 const reducerSample = (state = {}, action) => {
-     return state
+    return state
 }
 
 export default combineReducers({
-    reducerSample
-});
+    reducerSample,
+})
