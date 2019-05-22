@@ -3,24 +3,23 @@ import React from 'react'
 import { PropTypes } from 'prop-types'
 
 // Internal
+import Button from '../../Button/Button'
 import './TodoPreview.scss'
 
-const TodoPreview = ({ title, content, due, priority, done }) => (
-    <>
+const TodoPreview = ({ title, due, priority, completed }) => (
+    <Button>
         <div>{title}</div>
-        <div>{content}</div>
-        <div>{due.toString()}</div>
+        <div>{due}</div>
         <div>{priority}</div>
-        <div>{done}</div>
-    </>
+        <div>{completed}</div>
+    </Button>
 )
 
 TodoPreview.propTypes = {
     title: PropTypes.string,
-    content: PropTypes.string,
-    due: PropTypes.string,
-    priority: PropTypes.string,
-    done: PropTypes.string,
+    due: PropTypes.number,
+    priority: PropTypes.number,
+    completed: PropTypes.bool,
 }
 
 export default TodoPreview

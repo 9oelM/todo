@@ -121,6 +121,14 @@ restart mongodb
 sudo service mongod restart
 ```
 
+## Etc (for myself)
+
+Front dev `localhost:8080`
+
+```
+https://5d2fbf9bed8b47c7abc49447f8d8f150.vfs.cloud9.us-east-1.amazonaws.com/
+```
+
 ## 요구사항
 
 ● 기능 요구사항
