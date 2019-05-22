@@ -26,9 +26,20 @@ todo front &amp; back
 
 ### Basic setup
 
-- Make sure you have installed latest version of `node` and `yarn`
+Note: this setup was tried out on Ubuntu LTS 18.04
 
+```bash
+ubuntu:~/environment/todo/client (master) $ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 18.04.2 LTS
+Release:        18.04
+Codename:       bionic
 ```
+
+Make sure you have installed latest version of `node` and `yarn`
+
+```bash
 $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash # install nvm
 
 $ export NVM_DIR="$HOME/.nvm"
@@ -42,12 +53,24 @@ $ npm install -g yarn
 
 ### Client setup
 
-Install packages with `yarn`
+#### 1. Install packages with `yarn`
 
 ```
 $ cd client
 
 $ yarn
+```
+
+#### 2. Launch client server
+
+```
+$ yarn start
+```
+
+#### Other available commands
+
+```
+$ yarn start|build|test|eject|lint
 ```
 
 ### Server setup
@@ -87,6 +110,12 @@ May 22 05:05:36 ip-172-31-37-115 systemd[1]: Started An object/document-oriented
 $ cd server
 
 $ yarn start
+```
+
+#### Other available commands
+
+```
+$ yarn start|lint
 ```
 
 ## Etc (for myself)
@@ -130,7 +159,7 @@ https://5d2fbf9bed8b47c7abc49447f8d8f150.vfs.cloud9.us-east-1.amazonaws.com:8081
 제출물
 ● 소스 코드가 담긴 github URL
 
-- [ ] github의 readme에는 해당 웹서버를 리눅스 기준으로 실행하기 위해 필요한 설치 및 빌드 방법이 작성되어 있어야 합니다.
+- [x] github의 readme에는 해당 웹서버를 리눅스 기준으로 실행하기 위해 필요한 설치 및 빌드 방법이 작성되어 있어야 합니다.
 
 ● 접속하여 테스트 가능한 URL
 
