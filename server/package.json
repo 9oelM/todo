@@ -5,13 +5,14 @@
     "license": "MIT",
     "scripts": {
         "start": "babel-node ./App.js",
-        "lint": "prettier --write ./**/* && prettier --write ./*"
+        "lint": "prettier --write './**/*.js'"
     },
     "dependencies": {
         "@babel/node": "^7.4.5",
         "body-parser": "^1.19.0",
         "dotenv": "^8.0.0",
         "express": "^4.17.0",
+        "keymirror": "^0.1.1",
         "mongoose": "^5.5.10",
         "prettier": "^1.17.1"
     },
