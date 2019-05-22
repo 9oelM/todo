@@ -22,9 +22,10 @@ const TodoList = () => {
     // due and lastUpdated represent the number of milliseconds since the Unix Epoch.
     })
     */
-    return todos.map(({ title, priority, completed, due }) => (
+    return todos.map(({ id, title, priority, completed, due }) => (
         <TodoPreview
             key={si.generate()}
+            id={id}
             title={title}
             priority={priority}
             due={due}
@@ -33,8 +34,6 @@ const TodoList = () => {
     ))
 }
 
-TodoList.propTypes = {
-    test: PropTypes.array,
-}
+TodoList.propTypes = {}
 
 export default TodoList

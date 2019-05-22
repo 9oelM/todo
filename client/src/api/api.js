@@ -1,7 +1,10 @@
+// External
+import 'dotenv/config'
+
 // Internal
 import { SimpleFetch } from './util'
 
-const simpleFetch = new SimpleFetch('localhost:8888')
+const simpleFetch = new SimpleFetch(process.env.SERVER)
 
 const getTodos = () => simpleFetch.getMethod('todo')
 

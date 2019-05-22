@@ -2,6 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { StoreContext } from 'redux-react-hook'
+import 'roboto-fontface/css/roboto/roboto-fontface.css'
 
 // Internal
 import App from './components/App/App'
