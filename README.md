@@ -60,7 +60,7 @@ $ cd server
 $ yarn
 ```
 
-#### 2. Install mongodb & check it's running
+#### 2. Install and check mongodb
 
 ```
 $ sudo apt update
@@ -81,52 +81,18 @@ ubuntu:~/environment/todo (dev-server) $  sudo systemctl status mongodb
 May 22 05:05:36 ip-172-31-37-115 systemd[1]: Started An object/document-oriented database.
 ```
 
-#### 3. Run `mongodb` and give it an access to database
-
-```
-$ mongo --port 27017
-
-$ use admin
-
-# This creates an entry for Joel in the admin database.
-$ db.createUser(
-  {
-    user: "Joel",
-    pwd: "1234",
-    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
-  }
-)
-```
-
-insert the following lines to mongod.conf (be aware of indentation) and save.
-
-```
-$ sudo vi /etc/mongod.conf
-
-systemLog:
- destination: file
- path: /usr/local/var/log/mongodb/mongo.log
- logAppend: true
-storage:
- dbPath: /usr/local/var/mongodb
-net:
- bindIp: 127.0.0.1
-security:
- authorization: enabled
-```
-
-restart mongodb
-
-```
-sudo service mongod restart
-```
-
 ## Etc (for myself)
 
-Front dev `localhost:8080`
+Front dev: `localhost:8080`
 
 ```
 https://5d2fbf9bed8b47c7abc49447f8d8f150.vfs.cloud9.us-east-1.amazonaws.com/
+```
+
+Server dev: `localhost:8081`
+
+```
+https://5d2fbf9bed8b47c7abc49447f8d8f150.vfs.cloud9.us-east-1.amazonaws.com:8081/
 ```
 
 ## 요구사항
