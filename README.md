@@ -81,6 +81,14 @@ ubuntu:~/environment/todo (dev-server) $  sudo systemctl status mongodb
 May 22 05:05:36 ip-172-31-37-115 systemd[1]: Started An object/document-oriented database.
 ```
 
+#### 3. Launch server
+
+```
+$ cd server
+
+$ yarn start
+```
+
 ## Etc (for myself)
 
 Front dev: `localhost:8080`
