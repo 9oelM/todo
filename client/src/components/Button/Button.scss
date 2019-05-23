@@ -14,4 +14,12 @@
     padding: 0;
     min-height: 75px;
     font-size: $font-web;
+    cursor: pointer;
+    width: 100%;
+}
+
+@include makeResponsive() {
+    .button {
+        font-size: $font-mobile;
+    }
 }

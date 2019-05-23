@@ -5,7 +5,7 @@ let TodoSchema = new Schema({
     title: String,
     content: String,
     priority: Number,
-    completed: Boolean,
+    isDone: Boolean,
     due: Number,
     lastUpdated: Number,
     // due and lastUpdated represent the number of milliseconds since the Unix Epoch.

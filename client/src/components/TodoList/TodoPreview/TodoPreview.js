@@ -1,58 +1,48 @@
 // External
-import React, { useCallback } from 'react'
-import { useMappedState, useDispatch } from 'redux-react-hook'
+import React, {useState} from 'react'
 import { PropTypes } from 'prop-types'
-import Checkbox from 'rc-checkbox'
-import 'rc-checkbox/assets/index.css'
+import ReactTooltip from 'react-tooltip'
+import { DatetimePicker } from 'rc-datetime-picker'
+import 'rc-datetime-picker/dist/picker.min.css'
+import moment from 'moment'
 
 // Internal
 import Button from '../../Button/Button'
+import Checkbox from '../../Checkbox/Checkbox'
+import { Calendar, Priority } from '../../Icons/Icons'
+
 import './TodoPreview.scss'
 
-const handleCheckboxToggle = () => {
-    // 1. UPDATE difference
-    // 2. Strikethrough
-}
-
-const TodoPreview = ({ id, title, due, priority, completed }) => {
-    // TODO: think again on how the whole todopreview and todolist would interact to receive props and update component
-    console.log(id)
-    const mapState = useCallback(
-        state => state.todoReducer.todos.find(elem => elem.id == id),
-        [id]
-    )
-    const todo = useMappedState(mapState)
-    console.log(todo)
-    const dispatch = useDispatch()
-    const changeTodo = useCallback(
-        () =>
-            dispatch({
-                type: 'CHANGE_TODO',
-                data: {
-                    id,
-                    completed: !todo.completed,
-                },
-            }),
-        [id]
-    )
-
+const TodoPreview = ({ id, title, due, priority, isDone, handleClick }) => {
+    
+    const [time, setTime] = useState(moment(due, 'x'))
+    const handleTimeChange = time => {
+        setTime({
+          time
+        });
+    }
+    
     return (
         <Button>
-            {completed ? (
-                <Checkbox checked onChange={changeTodo} />
+            <Checkbox isChecked={isDone} />
+            {isDone ? (
+                <div className="todo-preview-title">
+                    <strike>{title}</strike>
+                </div>
             ) : (
-                <Checkbox onChange={changeTodo} />
+                <div className="todo-preview-title">{title}</div>
             )}
-            {completed ? (
-                <strike>
-                    <div>{title}</div>
-                </strike>
-            ) : (
-                <div>{title}</div>
-            )}
-            <div>{due}</div>
-            <div>{priority}</div>
-            <div>{completed}</div>
+            <a data-tip data-for="calendar" class="todo-preview-icon">
+                <div>
+                    <Calendar />
+                </div>
+            </a>
+            <ReactTooltip id="calendar" data-iscapture="true" event="click" place = "left">
+                <DatetimePicker moment={time} onChange={handleTimeChange} />
+            </ReactTooltip>
+            <div>
+                <Priority level={priority} />
+            </div>
         </Button>
     )
 }
@@ -62,7 +52,7 @@ TodoPreview.propTypes = {
     title: PropTypes.string,
     due: PropTypes.number,
     priority: PropTypes.number,
-    completed: PropTypes.bool,
+    isDone: PropTypes.bool,
 }
 
 export default TodoPreview

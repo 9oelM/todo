@@ -15,7 +15,7 @@ const initialState = {
             content: '제대하는 기분은 이루 말할 수 없을 것 같다.',
             due: getTime('Aug 15 2019 09:30:00 GMT+0900'),
             priority: 2,
-            completed: false,
+            isDone: false,
         },
         {
             id: 2,
@@ -24,7 +24,7 @@ const initialState = {
             content: 'Fried chicken is a gift from the heaven.',
             due: getTime('May 30 2019 10:00:00 GMT+0900'),
             priority: 1,
-            completed: true,
+            isDone: true,
         },
         {
             id: 3,
@@ -33,7 +33,7 @@ const initialState = {
             content: '총 쏘고 닦고',
             due: getTime('May 23 2019 10:00:00 GMT+0900'),
             priority: 1,
-            completed: true,
+            isDone: true,
         },
     ],
 }
@@ -41,10 +41,10 @@ const initialState = {
 // TODO: Add actions (types) and corresponding state changes
 const todoReducer = (state = initialState, action) => {
     switch (action.type) {
-        case C.CHANGE_TODO:
+        case C.TOGGLE_TODO:
             return {
                 ...state,
-                completed: !state.isDrawerOpen,
+                isDone: action.isDone,
             }
         default:
             return state

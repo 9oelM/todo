@@ -1,5 +1,19 @@
 $white: #ffffff;
+$light-grey: #eaeaea;
 $grey: #bbbbbb;
 $quick: 0.2s;
 $font-web: 1.5rem;
 $font-mobile: 1rem;
+$responsive-break-point: 900px;
+
+@media screen and (max-width: 900px) {
+    .App {
+        width: 100%;
+    }
+}
+
+@mixin makeResponsive() {
+    @media screen and (max-width: $responsive-break-point) {
+        @content;
+    }
+}

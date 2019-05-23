@@ -1,0 +1,12 @@
+@import '../global';
+
+#add-todo-button {
+    font-weight: 700;
+    background-color: $light-grey;
+    &:hover{
+        background-color: $grey;
+    }
+    p{
+        padding: 0 0 0 33px;
+    }
+}
