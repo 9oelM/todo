@@ -39,10 +39,21 @@ const ArrowBack = () => (
 )
 
 const Priority = ({ level }) => {
-    const colors = {
-        red: '#ff7070',
-        black: '#353535',
-    }
+    const combinations = [
+        {
+            level: 1,
+            color: '#ff7070', // red
+        },
+        {
+            level: 2,
+            color: '#353535', // black
+        },
+        {
+            level: 3,
+            color: '#ffffff', // white
+        },
+    ]
+
     const Icon = ({ color }) => (
         <svg
             fill={color}
@@ -57,12 +68,10 @@ const Priority = ({ level }) => {
         </svg>
     )
 
-    if (level === 1) {
-        return <Icon color={colors.black} />
-    } else if (level >= 2) {
-        return <Icon color={colors.red} />
-    } else {
-        return null
+    const combi = combinations.find(combi => combi.level == level)
+    if (!combi) {
+        return <Icon color="#353535" /> // black
     }
+    return <Icon color={combi.color} />
 }
 export { Add, Calendar, Priority, ArrowBack }
