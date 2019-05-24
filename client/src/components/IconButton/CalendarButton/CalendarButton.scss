@@ -1,0 +1,13 @@
+@import '../../global';
+
+.todo-preview-calendar {
+    margin: 0 0 0 auto;
+}
+
+.todo-preview-set-due {
+    @include makeTooltipPretty();
+}
+
+.tippy-tooltip [x-circle] {
+    background-color: transparent;
+}

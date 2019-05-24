@@ -18,3 +18,14 @@ $responsive-break-point: 900px;
         @content;
     }
 }
+
+@mixin makeTooltipPretty() {
+    background-color: $light-grey;
+    box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+    padding: 10px 10px 10px 10px;
+    p {
+        margin: 5px;
+        color: $black;
+        font-weight: 700;
+    }
+}

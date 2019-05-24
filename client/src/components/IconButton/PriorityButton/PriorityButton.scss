@@ -1,0 +1,5 @@
+@import '../../global';
+
+.todo-preview-set-priority {
+    @include makeTooltipPretty();
+}
