@@ -1,0 +1,25 @@
+@import '../../global';
+
+.todo-preview-title {
+    text-align: left;
+    margin: 0 0 0 10px;
+    max-width: 60%;
+}
+.todo-preview-calendar {
+    margin: 0 0 0 auto;
+}
+.tippy-tooltip [x-circle] {
+    background-color: transparent;
+}
+
+.todo-preview-set-priority,
+.todo-preview-set-due {
+    background-color: $light-grey;
+    box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+    padding: 10px 10px 10px 10px;
+    p {
+        margin: 5px;
+        color: $black;
+        font-weight: 700;
+    }
+}

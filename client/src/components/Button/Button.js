@@ -1,10 +1,17 @@
 // External
 import React from 'react'
 
-const Button = ({ handleClick, children }) => (
-    <button onClick={handleClick} className="button">
+// Internal
+import './Button.scss'
+
+const Button = ({ handleClick, children, id = '', className = '' }) => (
+    <div
+        onClick={() => console.log('clicked')}
+        className={`button ${className}`}
+        id={id}
+    >
         {children}
-    </button>
+    </div>
 )
 
 export default Button

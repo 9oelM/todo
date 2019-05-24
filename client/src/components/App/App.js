@@ -8,7 +8,9 @@ import './App.scss'
 const App = () => {
     return (
         <div className="App">
-            <TodoList />
+            <div id="todo-container">
+                <TodoList />
+            </div>
         </div>
     )
 }

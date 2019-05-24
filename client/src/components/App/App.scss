@@ -1,4 +1,12 @@
 .App {
     height: 100%;
+    width: 70%;
+}
+@media screen and (max-width: 900px) {
+    .App {
+        width: 100%;
+    }
+}
+#todo-container {
     width: 100%;
 }
