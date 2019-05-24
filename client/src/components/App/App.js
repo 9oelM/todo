@@ -4,6 +4,7 @@ import ReactSwipe from 'react-swipe'
 
 // Internal
 import TodoList from '../TodoList/TodoList'
+import TodoEditor from '../TodoEditor/TodoEditor'
 import './App.scss'
 
 const App = () => {
@@ -15,10 +16,12 @@ const App = () => {
                 swipeOptions={{ continuous: false }}
                 ref={el => (reactSwipeEl = el)}
             >
-                <div id="todo-container">
-                    <TodoList handleSwipe={() => reactSwipeEl.next()} />
-                </div>
-                <div id="todo-editor" />
+                <section id="todo-container">
+                    <TodoList handleSlideLeft={() => reactSwipeEl.next()} />
+                </section>
+                <section id="todo-editor">
+                    <TodoEditor handleSlideRight={() => reactSwipeEl.prev()} />
+                </section>
             </ReactSwipe>
         </div>
     )

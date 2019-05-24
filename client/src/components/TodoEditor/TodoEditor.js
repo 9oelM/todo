@@ -1,30 +1,50 @@
 // External
 import React, { useState } from 'react'
-import { useMappedState, useDispatch } from 'redux-react-hook'
 import { PropTypes } from 'prop-types'
+import moment from 'moment'
 
 // Internal
-import './TodoEditor.scss'
+import ArrowBackButton from '../IconButton/ArrowBackButton/ArrowBackButton'
+import CalendarButton from '../IconButton/CalendarButton/CalendarButton'
+import DeleteButton from '../IconButton/DeleteButton/DeleteButton'
+import PriorityButton from '../IconButton/PriorityButton/PriorityButton'
 import Button from '../Button/Button'
+import Checkbox from '../Checkbox/Checkbox'
 
-const handleCheckboxToggle = () => {
-    // 1. UPDATE difference
-    // 2. Strikethrough
-}
+import './TodoEditor.scss'
 
-const EditablePlainText = ({value, onClick}) => {
-    const [toggle, setToggle] = useState(false)
-    const displayEditableTextArea = (value) => <textarea>value</textarea>
-    return toggle ? <Button className = "editable" handleClick={onClick}>{value}</Button> : displayEditableTextArea(value)
-}
+const TodoEditor = ({
+    id,
+    due = new Date().getTime(),
+    priority = 1,
+    handleSlideRight,
+}) => {
+    // get state by using the id
+    const [time, setTime] = useState(moment(due, 'x'))
 
-const TodoEditor = ({title, content}) => {
-    return <div>
-    <EditablePlainText value={title} onClick ={}/>
-    <textarea>
-    asdasd
-    </textarea>
-    </div>
+    const handleTimeChange = time => {
+        setTime(time)
+    }
+
+    return (
+        <>
+            <div>
+                <ArrowBackButton handleClick={handleSlideRight} />
+                <Checkbox />
+                <CalendarButton
+                    time={time}
+                    handleTimeChange={handleTimeChange}
+                />
+                <DeleteButton />
+                <PriorityButton priority={priority} />
+            </div>
+            <textarea>test</textarea>
+            <textarea>asfsadfasdf</textarea>
+            <div>
+                <Button>Save</Button>
+            </div>
+        </>
+    )
 }
 
 TodoEditor.propTypes = {

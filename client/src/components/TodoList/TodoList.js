@@ -10,7 +10,7 @@ import './TodoList.scss'
 
 const getTime = (date = '') => new Date(date).getTime()
 
-const TodoList = () => {
+const TodoList = ({ handleSlideLeft }) => {
     const [todos, setTodos] = useState([
         {
             id: 1,
@@ -53,11 +53,15 @@ const TodoList = () => {
 
     return (
         <>
-            <Button id="add-todo-button" handleClick={() => {}}>
+            <Button id="add-todo-button" handleClick={handleSlideLeft}>
                 <p>Add a new todo</p>
             </Button>
             {todos.map(todo => (
-                <TodoPreview key={si.generate()} {...todo} />
+                <TodoPreview
+                    key={si.generate()}
+                    handleSlideLeft={handleSlideLeft}
+                    {...todo}
+                />
             ))}
         </>
     )

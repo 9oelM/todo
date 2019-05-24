@@ -13,17 +13,15 @@ import PriorityButton from '../../IconButton/PriorityButton/PriorityButton'
 
 import './TodoPreview.scss'
 
-const TodoPreview = ({ id, title, due, priority, isDone, handleClick }) => {
+const TodoPreview = ({ id, title, due, priority, isDone, handleSlideLeft }) => {
     const [time, setTime] = useState(moment(due, 'x'))
 
     const handleTimeChange = time => {
         setTime(time)
     }
 
-    const stopPropagation = e => e.stopPropagation()
-
     return (
-        <Button>
+        <Button handleClick={handleSlideLeft}>
             <Checkbox isChecked={isDone} />
             {isDone ? (
                 <div className="todo-preview-title">
