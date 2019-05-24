@@ -6,11 +6,12 @@ import { PropTypes } from 'prop-types'
 import { Delete as DeleteIcon } from '../Icons/Icons'
 import './DeleteButton.scss'
 
-const DeleteButton = ({ handleClick }) => (
+const DeleteButton = ({ handleClick, className = '' }) => (
     <div
         onClick={e => {
             e.stopPropagation()
         }}
+        className={`icon-button ${className}`}
     >
         <DeleteIcon />
     </div>

@@ -1,0 +1,54 @@
+@import '../global';
+
+#todo-editor-options {
+    display: flex;
+    align-items: center;
+    min-height: $standard-height;
+    background-color: $light-grey;
+    padding: 0 0 0 $standard-left-pad;
+    .checkbox {
+        margin: 0 15px 0 auto;
+    }
+}
+
+.textarea {
+    width: 99.9%;
+    resize: none;
+}
+
+#textarea-title {
+    font-size: $font-web;
+    font-weight: 700;
+    line-height: $font-web;
+    padding: 10px 0 10px $standard-left-pad;
+    min-height: 30px;
+    height: 50px;
+}
+
+#textarea-content {
+    height: calc(
+        100% - 50px - 75px - 90px
+    ); // 90px instead of 75px to compensate for textarea's strange behaviour
+    padding: 20px $standard-left-pad;
+    margin: 0;
+}
+
+#todo-editor-save-container {
+    display: flex;
+    height: 75px;
+    justify-content: flex-end;
+    .button {
+        width: 80px;
+        min-height: 45px;
+        height: 45px;
+        background-color: #bbbbbb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto 15px auto 0;
+        span {
+            font-size: $font-web;
+            font-weight: 700;
+        }
+    }
+}

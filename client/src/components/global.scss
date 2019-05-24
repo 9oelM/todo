@@ -6,6 +6,19 @@ $quick: 0.2s;
 $font-web: 1.5rem;
 $font-mobile: 1rem;
 $responsive-break-point: 900px;
+$standard-height: 75px;
+$standard-left-pad: 33px;
+
+.icon-button {
+    cursor: pointer;
+    margin: 5px;
+}
+.leftmost-button {
+    margin-left: auto;
+}
+.margin-right {
+    margin-right: 15px;
+}
 
 @media screen and (max-width: 900px) {
     .App {

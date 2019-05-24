@@ -1,10 +1,10 @@
 @import '../../global';
 
-.todo-preview-calendar {
+.todo-calendar {
     margin: 0 0 0 auto;
 }
 
-.todo-preview-set-due {
+.todo-set-due {
     @include makeTooltipPretty();
 }
 

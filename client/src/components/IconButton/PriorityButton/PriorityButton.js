@@ -14,11 +14,12 @@ const PriorityButton = ({ priority, handleClick }) => (
         onClick={e => {
             e.stopPropagation()
         }}
+        className="icon-button"
     >
         <Tooltip
             // options
             html={
-                <div className="todo-preview-set-priority">
+                <div className="todo-set-priority">
                     <p>Set a priority of this todo</p>
                     {[1, 2, 3].map(num => (
                         <PriorityIcon level={num} key={si.generate()} />

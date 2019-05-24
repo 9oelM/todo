@@ -28,20 +28,30 @@ const TodoEditor = ({
 
     return (
         <>
-            <div>
+            <div id="todo-editor-options">
                 <ArrowBackButton handleClick={handleSlideRight} />
                 <Checkbox />
                 <CalendarButton
                     time={time}
                     handleTimeChange={handleTimeChange}
                 />
-                <DeleteButton />
                 <PriorityButton priority={priority} />
+                <DeleteButton className="margin-right" />
             </div>
-            <textarea>test</textarea>
-            <textarea>asfsadfasdf</textarea>
-            <div>
-                <Button>Save</Button>
+            <textarea class="textarea" id="textarea-title" placeholder="Title">
+                test
+            </textarea>
+            <textarea
+                class="textarea"
+                id="textarea-content"
+                placeholder="Enter your content here"
+            >
+                asfsadfasdf
+            </textarea>
+            <div id="todo-editor-save-container">
+                <Button>
+                    <span>Save</span>
+                </Button>
             </div>
         </>
     )

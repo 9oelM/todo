@@ -30,9 +30,13 @@ const TodoPreview = ({ id, title, due, priority, isDone, handleSlideLeft }) => {
             ) : (
                 <div className="todo-preview-title">{title}</div>
             )}
-            <CalendarButton time={time} handleTimeChange={handleTimeChange} />
+            <CalendarButton
+                time={time}
+                handleTimeChange={handleTimeChange}
+                className="leftmost-button"
+            />
             <PriorityButton priority={priority} />
-            <DeleteButton />
+            <DeleteButton className="margin-right" />
         </Button>
     )
 }

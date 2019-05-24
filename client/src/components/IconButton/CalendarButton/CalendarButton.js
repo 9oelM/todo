@@ -10,12 +10,15 @@ import 'rc-datetime-picker/dist/picker.min.css'
 import { Calendar as CalendarIcon } from '../Icons/Icons'
 import './CalendarButton.scss'
 
-const CalendarButton = ({ time, handleTimeChange }) => (
-    <div onClick={e => e.stopPropagation()} className="todo-preview-calendar">
+const CalendarButton = ({ time, handleTimeChange, className = '' }) => (
+    <div
+        onClick={e => e.stopPropagation()}
+        className={`icon-button todo-calendar ${className}`}
+    >
         <Tooltip
             // options
             html={
-                <div className="todo-preview-set-due">
+                <div className="todo-set-due">
                     <p>Set a due date for this todo</p>
                     <DatetimePicker moment={time} onChange={handleTimeChange} />
                 </div>

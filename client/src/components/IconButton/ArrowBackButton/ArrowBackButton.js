@@ -12,6 +12,7 @@ const ArrowBackButton = ({ handleClick }) => (
             e.stopPropagation()
             handleClick()
         }}
+        className="icon-button"
     >
         <ArrowBackIcon />
     </div>
