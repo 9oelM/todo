@@ -38,16 +38,16 @@ const TodoEditor = ({
                 <PriorityButton priority={priority} />
                 <DeleteButton className="margin-right" />
             </div>
-            <textarea class="textarea" id="textarea-title" placeholder="Title">
-                test
-            </textarea>
             <textarea
-                class="textarea"
+                className="textarea"
+                id="textarea-title"
+                placeholder="Title"
+            />
+            <textarea
+                className="textarea"
                 id="textarea-content"
                 placeholder="Enter your content here"
-            >
-                asfsadfasdf
-            </textarea>
+            />
             <div id="todo-editor-save-container">
                 <Button>
                     <span>Save</span>
