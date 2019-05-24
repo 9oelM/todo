@@ -6,6 +6,19 @@ $quick: 0.2s;
 $font-web: 1.5rem;
 $font-mobile: 1rem;
 $responsive-break-point: 900px;
+$standard-height: 75px;
+$standard-left-pad: 33px;
+
+.icon-button {
+    cursor: pointer;
+    margin: 5px;
+}
+.leftmost-button {
+    margin-left: auto;
+}
+.margin-right {
+    margin-right: 15px;
+}
 
 @media screen and (max-width: 900px) {
     .App {
@@ -16,5 +29,16 @@ $responsive-break-point: 900px;
 @mixin makeResponsive() {
     @media screen and (max-width: $responsive-break-point) {
         @content;
+    }
+}
+
+@mixin makeTooltipPretty() {
+    background-color: $light-grey;
+    box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+    padding: 10px 10px 10px 10px;
+    p {
+        margin: 5px;
+        color: $black;
+        font-weight: 700;
     }
 }

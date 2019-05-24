@@ -3,10 +3,10 @@
 #add-todo-button {
     font-weight: 700;
     background-color: $light-grey;
-    &:hover{
+    &:hover {
         background-color: $grey;
     }
-    p{
-        padding: 0 0 0 33px;
+    p {
+        padding: 0 0 0 $standard-left-pad;
     }
 }

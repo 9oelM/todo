@@ -5,11 +5,7 @@ import React from 'react'
 import './Button.scss'
 
 const Button = ({ handleClick, children, id = '', className = '' }) => (
-    <div
-        onClick={() => console.log('clicked')}
-        className={`button ${className}`}
-        id={id}
-    >
+    <div onClick={handleClick} className={`button ${className}`} id={id}>
         {children}
     </div>
 )

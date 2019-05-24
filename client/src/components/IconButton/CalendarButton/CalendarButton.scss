@@ -1,0 +1,13 @@
+@import '../../global';
+
+.todo-calendar {
+    margin: 0 0 0 auto;
+}
+
+.todo-set-due {
+    @include makeTooltipPretty();
+}
+
+.tippy-tooltip [x-circle] {
+    background-color: transparent;
+}
