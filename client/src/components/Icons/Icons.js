@@ -1,8 +1,7 @@
+// External
 import React from 'react'
 
-const Buttonize = ({ handleClick, children }) => (
-    <div onClick={handleClick}>{children}</div>
-)
+// svg source: https://material.io/tools/icons/
 
 const Add = () => (
     <svg
@@ -15,6 +14,7 @@ const Add = () => (
         <path d="M0 0h24v24H0z" fill="none" />
     </svg>
 )
+
 const Calendar = () => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -26,6 +26,7 @@ const Calendar = () => (
         <path fill="none" d="M0 0h24v24H0z" />
     </svg>
 )
+
 const ArrowBack = () => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -38,22 +39,19 @@ const ArrowBack = () => (
     </svg>
 )
 
-const Priority = ({ level }) => {
-    const combinations = [
-        {
-            level: 1,
-            color: '#ff7070', // red
-        },
-        {
-            level: 2,
-            color: '#353535', // black
-        },
-        {
-            level: 3,
-            color: '#ffffff', // white
-        },
-    ]
+const Delete = () => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+    >
+        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z" />
+        <path fill="none" d="M0 0h24v24H0V0z" />
+    </svg>
+)
 
+const Priority = ({ level }) => {
     const Icon = ({ color }) => (
         <svg
             fill={color}
@@ -68,10 +66,17 @@ const Priority = ({ level }) => {
         </svg>
     )
 
-    const combi = combinations.find(combi => combi.level == level)
-    if (!combi) {
-        return <Icon color="#353535" /> // black
+    const red = '#ff7070'
+    const black = '#353535'
+    const white = '#ffffff'
+    const combinations = [red, black, white]
+    const selectedColor = combinations.find(
+        (elem, index) => index + 1 === level
+    )
+    if (!selectedColor) {
+        return <Icon color={black} />
     }
-    return <Icon color={combi.color} />
+    return <Icon color={selectedColor} />
 }
-export { Add, Calendar, Priority, ArrowBack }
+
+export { Add, Calendar, Priority, ArrowBack, Delete }

@@ -11,7 +11,7 @@ import si from 'shortid'
 // Internal
 import Button from '../../Button/Button'
 import Checkbox from '../../Checkbox/Checkbox'
-import { Calendar, Priority } from '../../Icons/Icons'
+import { Calendar, Priority, Delete } from '../../Icons/Icons'
 import './TodoPreview.scss'
 
 const TodoPreview = ({ id, title, due, priority, isDone, handleClick }) => {
@@ -70,6 +70,9 @@ const TodoPreview = ({ id, title, due, priority, isDone, handleClick }) => {
                 >
                     <Priority level={priority} />
                 </Tooltip>
+            </div>
+            <div onClick={stopPropagation}>
+                <Delete />
             </div>
         </Button>
     )
