@@ -10,15 +10,26 @@ const METHODS = keyMirror({
     DELETE: null,
 })
 
-const generateHTTPMethod = async (baseUrl, subUrl, sendOption, onError) =>
-    await fetch(`${baseUrl}/${subUrl}`, {
+const generateHTTPMethod = async (baseUrl, subUrl, sendOption, onError) => {
+    if (sendOption.body) {
+        // NOTE: not yet stringified with JSON
+        if (typeof body !== 'string') {
+            sendOption.body = JSON.stringify(sendOption.body)
+        }
+    }
+    return await fetch(`${baseUrl}/${subUrl}`, {
         ...sendOption,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
     })
         .then(response => response.json())
         .catch(error => {
             console.error(error)
             onError()
         })
+}
 
 class SimpleFetch {
     constructor(baseUrl) {
@@ -38,21 +49,36 @@ class SimpleFetch {
         )
 
     putMethod = async (subUrl, body, onError) =>
-        await generateHTTPMethod(this.baseUrl, subUrl, {
-            method: METHODS.PUT,
-            body,
-        })
+        await generateHTTPMethod(
+            this.baseUrl,
+            subUrl,
+            {
+                method: METHODS.PUT,
+                body,
+            },
+            onError
+        )
 
     postMethod = async (subUrl, body, onError) =>
-        await generateHTTPMethod(this.baseUrl, subUrl, {
-            method: METHODS.POST,
-            body,
-        })
+        await generateHTTPMethod(
+            this.baseUrl,
+            subUrl,
+            {
+                method: METHODS.POST,
+                body,
+            },
+            onError
+        )
 
-    deleteMethod = async subUrl =>
-        await generateHTTPMethod(this.baseUrl, subUrl, {
-            method: METHODS.DELETE,
-        })
+    deleteMethod = async (subUrl, onError) =>
+        await generateHTTPMethod(
+            this.baseUrl,
+            subUrl,
+            {
+                method: METHODS.DELETE,
+            },
+            onError
+        )
 }
 
 export { SimpleFetch }

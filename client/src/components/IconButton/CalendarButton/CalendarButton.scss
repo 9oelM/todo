@@ -11,3 +11,12 @@
 .tippy-tooltip [x-circle] {
     background-color: transparent;
 }
+
+.calendar-ok-button {
+    background-color: $light-grey;
+    color: $black;
+    p {
+        text-align: center;
+        width: 100%;
+    }
+}

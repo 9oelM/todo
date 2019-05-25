@@ -8,28 +8,45 @@ import './ErrorHandler.scss'
 
 toast.configure()
 
-const Message = ({ closeToast, handleRetry, children }) => (
+const Message = ({
+    closeToast,
+    handleRetry,
+    buttonText = 'Retry',
+    className = '',
+    children,
+}) => (
     <div className="todo-notification">
         <p>{children}</p>
         <button
-            className="todo-notification-button"
+            className={`todo-notification-button ${className}`}
             onClick={e => {
                 e.stopPropagation()
-                handleRetry()
+                if (handleRetry) handleRetry()
                 closeToast()
             }}
         >
-            Retry
+            {buttonText}
         </button>
     </div>
 )
 
-const onError = handleRetry =>
-    toast.error(
-        <Message handleRetry={handleRetry}>
-            There was an error while syncing with the server.
+const onError = (msg, handleRetry) =>
+    toast.error(<Message handleRetry={handleRetry}>{msg}</Message>, {
+        autoClose: false,
+        position: 'top-right',
+        closeOnClick: false,
+    })
+
+const onInfo = (msg, buttonText = 'OK') =>
+    toast.info(
+        <Message className="info" buttonText={buttonText}>
+            {msg}
         </Message>,
-        { autoClose: false, position: 'bottom-left', closeOnClick: false }
+        {
+            autoClose: true,
+            position: 'top-right',
+            closeOnClick: false,
+        }
     )
 
-export default onError
+export { onError, onInfo }

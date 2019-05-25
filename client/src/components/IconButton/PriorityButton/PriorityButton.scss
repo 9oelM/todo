@@ -3,3 +3,11 @@
 .todo-set-priority {
     @include makeTooltipPretty();
 }
+
+.todo-priorities-container {
+    display: flex;
+    justify-content: center;
+    > div {
+        cursor: pointer;
+    }
+}

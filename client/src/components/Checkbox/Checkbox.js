@@ -9,6 +9,7 @@ const Checkbox = ({ handleClick, isChecked }) =>
         <input
             type="checkbox"
             onClick={e => e.stopPropagation()}
+            onChange={handleClick}
             checked
             className="checkbox"
         />

@@ -8,11 +8,13 @@ const simpleFetch = new SimpleFetch('https://35.208.190.165/')
 
 const getTodos = onError => simpleFetch.getMethod('todo', onError)
 
-const createTodo = todo => simpleFetch.postMethod('todo', todo)
+const createTodo = (todo, onError) =>
+    simpleFetch.postMethod('todo', todo, onError)
 
-const updateTodo = (todoId, todo) =>
-    simpleFetch.putMethod(`todo/${todoId}`, todo)
+const updateTodo = (todoId, todo, onError) =>
+    simpleFetch.putMethod(`todo/${todoId}`, todo, onError)
 
-const deleteTodo = todoId => simpleFetch.deleteMethod('todo/${todoId}')
+const deleteTodo = (todoId, onError) =>
+    simpleFetch.deleteMethod(`todo/${todoId}`, onError)
 
 export { getTodos, createTodo, updateTodo, deleteTodo }

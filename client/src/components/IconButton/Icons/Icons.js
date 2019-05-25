@@ -68,8 +68,8 @@ const Priority = ({ level }) => {
 
     const red = '#ff7070'
     const black = '#353535'
-    const white = '#ffffff'
-    const combinations = [red, black, white]
+    const grey = '#8a8a8a'
+    const combinations = [red, black, grey]
     const selectedColor = combinations.find(
         (elem, index) => index + 1 === level
     )

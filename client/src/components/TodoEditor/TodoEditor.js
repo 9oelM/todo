@@ -4,6 +4,8 @@ import { PropTypes } from 'prop-types'
 import moment from 'moment'
 
 // Internal
+import { createTodo, updateTodo, deleteTodo } from '../../util/api'
+import { onError, onInfo } from '../ErrorHandler/ErrorHandler'
 import ArrowBackButton from '../IconButton/ArrowBackButton/ArrowBackButton'
 import CalendarButton from '../IconButton/CalendarButton/CalendarButton'
 import DeleteButton from '../IconButton/DeleteButton/DeleteButton'
@@ -13,43 +15,94 @@ import Checkbox from '../Checkbox/Checkbox'
 
 import './TodoEditor.scss'
 
-const TodoEditor = ({
-    id,
-    due = new Date().getTime(),
-    priority = 1,
-    handleSlideRight,
-}) => {
-    // get state by using the id
-    const [time, setTime] = useState(moment(due, 'x'))
+const TodoEditor = ({ rootState, setRootState, handleSlideRight }) => {
+    const initialTempState = {
+        title: '',
+        content: '',
+        due: moment(),
+        priority: 3,
+        isDone: false,
+    }
 
-    const handleTimeChange = time => {
-        setTime(time)
+    const [tempState, setTempState] = useState(initialTempState)
+
+    const { title, content, due, priority, isDone } = tempState
+
+    const { isNewNote, updateUtility, todos } = rootState
+
+    const handleChange = (key, value) => {
+        setTempState(state => ({
+            ...state,
+            [key]: value,
+        }))
+    }
+
+    const handleAbort = () => {
+        if (isNewNote && window.confirm('Are you sure you want to abort?')) {
+            setTempState(() => initialTempState)
+            handleSlideRight()
+        }
     }
 
     return (
         <>
             <div id="todo-editor-options">
-                <ArrowBackButton handleClick={handleSlideRight} />
-                <Checkbox />
+                <ArrowBackButton handleClick={handleAbort} />
+                <Checkbox handleClick={() => handleChange('isDone', !isDone)} />
                 <CalendarButton
-                    time={time}
-                    handleTimeChange={handleTimeChange}
+                    time={due}
+                    handleTimeChange={moment => handleChange('due', moment)}
+                    tooltipPosition="bottom"
                 />
-                <PriorityButton priority={priority} />
-                <DeleteButton className="margin-right" />
+                <PriorityButton
+                    priority={priority}
+                    handleClick={level => handleChange('priority', level)}
+                    tooltipPosition="bottom"
+                />
+                <DeleteButton
+                    className="margin-right"
+                    handleClick={handleAbort}
+                />
             </div>
             <textarea
                 className="textarea"
                 id="textarea-title"
                 placeholder="Title"
+                value={title}
+                onChange={e => handleChange('title', e.target.value)}
             />
             <textarea
                 className="textarea"
                 id="textarea-content"
                 placeholder="Enter your content here"
+                value={content}
+                onChange={e => handleChange('content', e.target.value)}
             />
             <div id="todo-editor-save-container">
-                <Button>
+                <Button
+                    handleClick={async () => {
+                        if (title.length === 0 || content.length === 0) {
+                            onInfo(
+                                'You have not entered the title or the content. Please try again.'
+                            )
+                        } else {
+                            const requestCreateTodoAndHandleError = async () => {
+                                await createTodo(tempState, () =>
+                                    onError(requestCreateTodoAndHandleError)
+                                )
+                            }
+                            if (isNewNote) {
+                                // createTodo
+                                await requestCreateTodoAndHandleError()
+                                handleSlideRight()
+                                // NOTE: this part is essential to invoke another getTodos()
+                                setRootState('updateUtility', updateUtility + 1)
+                            } else {
+                                // updateTodo
+                            }
+                        }
+                    }}
+                >
                     <span>Save</span>
                 </Button>
             </div>
@@ -58,11 +111,10 @@ const TodoEditor = ({
 }
 
 TodoEditor.propTypes = {
-    id: PropTypes.number,
     title: PropTypes.string,
     due: PropTypes.number,
     priority: PropTypes.number,
-    completed: PropTypes.bool,
+    isDone: PropTypes.bool,
 }
 
 export default TodoEditor
