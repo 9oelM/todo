@@ -2,6 +2,9 @@
 import Express from 'express'
 import BodyParser from 'body-parser'
 import Mongoose from 'mongoose'
+import Cors from 'cors'
+import https from 'https'
+import fs from 'fs'
 
 // Internal
 import routes from './routes/index'
@@ -18,6 +21,7 @@ Mongoose.connect(dbUrl, { useNewUrlParser: true })
     .catch(e => console.error(e))
 
 const app = Express()
+app.use(Cors())
 app.use(BodyParser.urlencoded({ extended: true }))
 app.use(BodyParser.json())
 app.use('', routes)
@@ -31,8 +35,16 @@ app.get('/', (req, res) => {
   `)
 })
 
-const port = 8081
-
-app.listen(port, () => {
-    console.log(`Server listening on port ${port}`)
-})
+const port = 443
+https
+    .createServer(
+        {
+            key: fs.readFileSync('./key.pem'),
+            cert: fs.readFileSync('./cert.pem'),
+            passphrase: 'joel',
+        },
+        app
+    )
+    .listen(port, () => {
+        console.log(`Server listening on port ${port}`)
+    })
