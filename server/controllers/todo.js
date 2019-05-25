@@ -65,11 +65,11 @@ const getTodos = (req, res) => {
 const createTodo = (req, res) => {
     const { title, content, due, priority, isDone } = req.body
     const todo = new Todo({
-	title,
-	content,
-	priority,
-	isDone,
-	due: getTime(due),
+        title,
+        content,
+        priority,
+        isDone,
+        due: getTime(due),
         lastUpdated: getTime(),
     })
     console.log(todo)
@@ -85,15 +85,20 @@ const createTodo = (req, res) => {
 }
 
 const updateTodo = (req, res) => {
-    Todo.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, todo) => {
-        if (err) {
-            logInfo(WORDS.UPDATE, WORDS.FAILURE)
-            res.status(STATUS.SERVER_ERROR).json(WORDS.FAILURE)
-        } else {
-            res.status(STATUS.OK).json(WORDS.SUCCESS)
-            logInfo(WORDS.UPDATE, WORDS.SUCCESS, () => log(todo))
+    Todo.findByIdAndUpdate(
+        req.params.id,
+        { $set: { ...req.body, lastUpdated: getTime() } },
+        { useFindAndModify: false },
+        (err, todo) => {
+            if (err) {
+                logInfo(WORDS.UPDATE, WORDS.FAILURE)
+                res.status(STATUS.SERVER_ERROR).json(WORDS.FAILURE)
+            } else {
+                res.status(STATUS.OK).json(WORDS.SUCCESS)
+                logInfo(WORDS.UPDATE, WORDS.SUCCESS, () => log(todo))
+            }
         }
-    })
+    )
 }
 
 const deleteTodo = (req, res) => {
