@@ -9,13 +9,11 @@ const METHODS = keyMirror({
     DELETE: null,
 })
 
-const generateHTTPMethod = async (baseUrl, subUrl, sendOption) => {
-    console.log(`${baseUrl}/${subUrl}`)
-    const result = await fetch(`${baseUrl}/${subUrl}`, {
+const generateHTTPMethod = async (baseUrl, subUrl, sendOption) =>
+    await fetch(`${baseUrl}/${subUrl}`, {
         ...sendOption,
-    })
-    console.log(result)
-}
+    }).then(response => response.json())
+
 class SimpleFetch {
     constructor(baseUrl) {
         // NOTE: remove / at the end to avoid confusion
