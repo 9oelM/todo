@@ -9,19 +9,10 @@ import { toast } from 'react-toastify'
 import { getTodos } from '../../util/api'
 import TodoList from '../TodoList/TodoList'
 import TodoEditor from '../TodoEditor/TodoEditor'
-import Message from '../ErrorHandler/ErrorHandler'
+import onError from '../ErrorHandler/ErrorHandler'
 import './App.scss'
 
 const App = () => {
-    toast.configure()
-    const onError = handleRetry =>
-        toast.error(
-            <Message handleRetry={handleRetry}>
-                There was an error while syncing with the server.
-            </Message>,
-            { autoClose: false, position: 'bottom-left', closeOnClick: false }
-        )
-
     const [rootState, setRootState] = useState({})
     useEffect(() => {
         const fetchData = async () => {
