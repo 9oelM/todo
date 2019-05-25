@@ -19,8 +19,7 @@
         "redux-react-hook": "^3.3.2",
         "roboto-fontface": "^0.10.0",
         "shortid": "^2.2.14",
-        "slick-carousel": "^1.8.1",
-        "swipe-js-iso": "^2.1.5"
+        "slick-carousel": "^1.8.1"
     },
     "scripts": {
         "start": "react-scripts start",
