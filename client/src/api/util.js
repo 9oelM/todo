@@ -2,12 +2,20 @@ import keyMirror from 'keymirror'
 
 /* global fetch */
 
-var METHODS = keyMirror({
+const METHODS = keyMirror({
     GET: null,
     PUT: null,
+    POST: null,
     DELETE: null,
 })
 
+const generateHTTPMethod = async (baseUrl, subUrl, sendOption) => {
+    console.log(`${baseUrl}/${subUrl}`)
+    const result = await fetch(`${baseUrl}/${subUrl}`, {
+        ...sendOption,
+    })
+    console.log(result)
+}
 class SimpleFetch {
     constructor(baseUrl) {
         // NOTE: remove / at the end to avoid confusion
@@ -15,19 +23,25 @@ class SimpleFetch {
         this.baseUrl = baseUrl
     }
 
-    getMethod = subUrl =>
-        fetch(`{this.baseUrl}/{subUrl}`, {
+    getMethod = async subUrl =>
+        await generateHTTPMethod(this.baseUrl, subUrl, {
             method: METHODS.GET,
         })
 
-    postMethod = (subUrl, body) =>
-        fetch(`{this.baseUrl}/{subUrl}`, {
+    putMethod = async (subUrl, body) =>
+        await generateHTTPMethod(this.baseUrl, subUrl, {
+            method: METHODS.PUT,
+            body,
+        })
+
+    postMethod = async (subUrl, body) =>
+        await generateHTTPMethod(this.baseUrl, subUrl, {
             method: METHODS.POST,
             body,
         })
 
-    removeMethod = subUrl =>
-        fetch(`{this.baseUrl}/{subUrl}`, {
+    deleteMethod = async subUrl =>
+        await generateHTTPMethod(this.baseUrl, subUrl, {
             method: METHODS.DELETE,
         })
 }
