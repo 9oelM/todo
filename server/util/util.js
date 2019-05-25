@@ -1,3 +1,3 @@
-const getTime = (date = '') => new Date(date).getTime()
+const getTime = date => date ? new Date(date).getTime() : new Date().getTime()
 
 export { getTime }
