@@ -21,7 +21,6 @@ const PriorityButton = ({
         className="icon-button"
     >
         <Tooltip
-            // options
             html={
                 <div className="todo-set-priority">
                     <p>Set a priority of this todo</p>

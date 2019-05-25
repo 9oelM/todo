@@ -85,9 +85,9 @@ const TodoPreview = ({
                 handleTimeChange={moment =>
                     handleChange('due', moment.valueOf())
                 }
-                updateAndCatchError={async () =>
+                handleClickOk={async due =>
                     await updateAndCatchError(_id, {
-                        due: tempState.due,
+                        due, // NOTE: the state for due property is managed inside CalendarButton component.
                         isDone,
                         title,
                         priority,
@@ -96,7 +96,19 @@ const TodoPreview = ({
                 }
                 className="leftmost-button"
             />
-            <PriorityButton priority={priority} />
+            <PriorityButton
+                priority={tempState.priority}
+                handleClick={async priority => {
+                    handleChange('priority', priority)
+                    await updateAndCatchError(_id, {
+                        priority: priority,
+                        due,
+                        isDone,
+                        title,
+                        content,
+                    })
+                }}
+            />
             <DeleteButton
                 className="margin-right"
                 handleClick={async () => await deleteAndCatchError(_id)}

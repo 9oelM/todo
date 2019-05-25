@@ -1,6 +1,5 @@
 // External
 import React, { useEffect, useState } from 'react'
-import useForceUpdate from 'use-force-update'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -26,7 +25,6 @@ const App = () => {
                     fetchData
                 )
             )
-            console.log(todos)
             setRootState(state => ({
                 ...state,
                 todos,
