@@ -63,19 +63,20 @@ const getTodos = (req, res) => {
 }
 
 const createTodo = (req, res) => {
-    const { title, content, priority, completed, due } = req.body
+    const { title, content, due, priority, isDone } = req.body
     const todo = new Todo({
+	title,
+	content,
+	priority,
+	isDone,
+	due: getTime(due),
         lastUpdated: getTime(),
-        title,
-        content,
-        priority,
-        completed,
-        due,
     })
+    console.log(todo)
     todo.save(err => {
         if (err) {
             logInfo(WORDS.CREATE, WORDS.FAILURE)
-            res.status(STATUS.CREATED).json(WORDS.FAILURE)
+            res.status(STATUS.SERVER_ERROR).json(WORDS.FAILURE)
         } else {
             res.status(STATUS.CREATED).json(WORDS.SUCCESS)
             logInfo(WORDS.CREATE, WORDS.SUCCESS, () => log(todo))
