@@ -1,4 +1,5 @@
 import keyMirror from 'keymirror'
+import { toast } from 'react-toastify'
 
 /* global fetch */
 
@@ -9,10 +10,15 @@ const METHODS = keyMirror({
     DELETE: null,
 })
 
-const generateHTTPMethod = async (baseUrl, subUrl, sendOption) =>
+const generateHTTPMethod = async (baseUrl, subUrl, sendOption, onError) =>
     await fetch(`${baseUrl}/${subUrl}`, {
         ...sendOption,
-    }).then(response => response.json())
+    })
+        .then(response => response.json())
+        .catch(error => {
+            console.error(error)
+            onError()
+        })
 
 class SimpleFetch {
     constructor(baseUrl) {
@@ -21,18 +27,23 @@ class SimpleFetch {
         this.baseUrl = baseUrl
     }
 
-    getMethod = async subUrl =>
-        await generateHTTPMethod(this.baseUrl, subUrl, {
-            method: METHODS.GET,
-        })
+    getMethod = async (subUrl, onError) =>
+        await generateHTTPMethod(
+            this.baseUrl,
+            subUrl,
+            {
+                method: METHODS.GET,
+            },
+            onError
+        )
 
-    putMethod = async (subUrl, body) =>
+    putMethod = async (subUrl, body, onError) =>
         await generateHTTPMethod(this.baseUrl, subUrl, {
             method: METHODS.PUT,
             body,
         })
 
-    postMethod = async (subUrl, body) =>
+    postMethod = async (subUrl, body, onError) =>
         await generateHTTPMethod(this.baseUrl, subUrl, {
             method: METHODS.POST,
             body,

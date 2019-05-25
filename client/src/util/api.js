@@ -2,11 +2,11 @@
 import 'dotenv/config'
 
 // Internal
-import { SimpleFetch } from './util'
+import { SimpleFetch } from './simpleFetch'
 
 const simpleFetch = new SimpleFetch('https://35.208.190.165/')
 
-const getTodos = () => simpleFetch.getMethod('todo')
+const getTodos = onError => simpleFetch.getMethod('todo', onError)
 
 const createTodo = todo => simpleFetch.postMethod('todo', todo)
 
