@@ -8,8 +8,10 @@ import './DeleteButton.scss'
 
 const DeleteButton = ({ handleClick, className = '' }) => (
     <div
+        data-confirm="Are you sure to delete?"
         onClick={e => {
             e.stopPropagation()
+            if (handleClick) handleClick()
         }}
         className={`icon-button ${className}`}
     >

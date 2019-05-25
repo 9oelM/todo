@@ -9,7 +9,11 @@ import 'react-tippy/dist/tippy.css'
 import { Priority as PriorityIcon } from '../Icons/Icons'
 import './PriorityButton.scss'
 
-const PriorityButton = ({ priority, handleClick }) => (
+const PriorityButton = ({
+    handleClick,
+    priority,
+    tooltipPosition = 'left',
+}) => (
     <div
         onClick={e => {
             e.stopPropagation()
@@ -21,13 +25,20 @@ const PriorityButton = ({ priority, handleClick }) => (
             html={
                 <div className="todo-set-priority">
                     <p>Set a priority of this todo</p>
-                    {[1, 2, 3].map(num => (
-                        <PriorityIcon level={num} key={si.generate()} />
-                    ))}
+                    <div className="todo-priorities-container">
+                        {[1, 2, 3].map(num => (
+                            <div
+                                key={si.generate()}
+                                onClick={() => handleClick(num)}
+                            >
+                                <PriorityIcon level={num} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             }
             interactive
-            position="left"
+            position={tooltipPosition}
             trigger="click"
         >
             <PriorityIcon level={priority} />

@@ -1,0 +1,23 @@
+@import '../global';
+
+.todo-notification {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    p {
+        margin: 0;
+    }
+    .todo-notification-button {
+        background-color: $white;
+        transition: background-color $quick;
+        border: none;
+        font-size: $font-mobile;
+        margin-left: auto;
+        cursor: pointer;
+        font-weight: 700;
+        color: #e74c3c;
+    }
+    .info {
+        color: #3498db;
+    }
+}

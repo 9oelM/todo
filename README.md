@@ -104,7 +104,15 @@ ubuntu:~/environment/todo (dev-server) $  sudo systemctl status mongodb
 May 22 05:05:36 ip-172-31-37-115 systemd[1]: Started An object/document-oriented database.
 ```
 
-#### 3. Launch server
+#### 3. Generate `.pem` files to use HTTPS (they are included in `.gitignore` by default)
+
+```
+$ cd server
+
+$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+```
+
+#### 4. Launch server
 
 ```
 $ cd server

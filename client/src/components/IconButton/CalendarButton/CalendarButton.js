@@ -1,5 +1,5 @@
 // External
-import React from 'react'
+import React, { useState } from 'react'
 import { PropTypes } from 'prop-types'
 import { Tooltip } from 'react-tippy'
 import 'react-tippy/dist/tippy.css'
@@ -9,27 +9,55 @@ import 'rc-datetime-picker/dist/picker.min.css'
 // Internal
 import { Calendar as CalendarIcon } from '../Icons/Icons'
 import './CalendarButton.scss'
+import Button from '../../Button/Button'
 
-const CalendarButton = ({ time, handleTimeChange, className = '' }) => (
-    <div
-        onClick={e => e.stopPropagation()}
-        className={`icon-button todo-calendar ${className}`}
-    >
-        <Tooltip
-            // options
-            html={
-                <div className="todo-set-due">
-                    <p>Set a due date for this todo</p>
-                    <DatetimePicker moment={time} onChange={handleTimeChange} />
-                </div>
-            }
-            interactive
-            position="left"
-            trigger="click"
+const CalendarButton = ({
+    time,
+    handleTimeChange,
+    className = '',
+    tooltipPosition = 'left',
+    updateAndCatchError,
+}) => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    return (
+        <div
+            onClick={e => {
+                e.stopPropagation()
+                setIsOpen(() => true)
+            }}
+            className={`icon-button todo-calendar ${className}`}
         >
-            <CalendarIcon />
-        </Tooltip>
-    </div>
-)
+            <Tooltip
+                html={
+                    <div className="todo-set-due">
+                        <p>Set a due date for this todo</p>
+                        <DatetimePicker
+                            moment={time}
+                            onChange={handleTimeChange}
+                        />
+                        <Button
+                            className="calendar-ok-button"
+                            handleClick={async () => {
+                                if (updateAndCatchError) {
+                                    await updateAndCatchError()
+                                }
+                                setIsOpen(() => false)
+                            }}
+                        >
+                            <p>OK</p>
+                        </Button>
+                    </div>
+                }
+                interactive
+                position={tooltipPosition}
+                trigger="click"
+                isOpen={isOpen}
+            >
+                <CalendarIcon />
+            </Tooltip>
+        </div>
+    )
+}
 
 export default CalendarButton
