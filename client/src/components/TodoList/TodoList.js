@@ -24,7 +24,7 @@ const TodoList = ({ history, rootState, triggerUpdateFromChild }) => {
             >
                 <p>Add a new todo</p>
             </Button>
-            {!isLoading ? (
+            {!isLoading && todos ? (
                 todos.map(todo => (
                     <TodoPreview
                         key={si.generate()}
