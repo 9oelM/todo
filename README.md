@@ -6,11 +6,7 @@ todo front &amp; back
 
 ### Client
 
-- React (Barebone, without an UI Framework)
-- Redux
-- Eslint
-- Webpack
-- Jest, Enzyme
+- create-react-app
 
 ### Server
 
@@ -20,9 +16,20 @@ todo front &amp; back
 ### Environment
 
 - Husky
+- Prettier
 - Yarn
 
 ## How to install & build
+
+### Before you go on (Important!!!)
+
+- The backend server runs only for an HTTP. But the frontend runs on HTTPS. In modern browsers, you may get this warning accessing [the demo page](https://joel-todos.netlify.com/) like this:
+
+![warning message](./warning.PNG)
+
+Then simply click on **'load unsafe script' (안전하지 않은 스크립트 로드).**
+
+Then the app will run properly.
 
 ### Basic setup
 
@@ -49,6 +56,8 @@ $ [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loa
 $ nvm install node
 
 $ npm install -g yarn
+
+$ git clone https://github.com/9oelM/todo.git
 ```
 
 ### Client setup
@@ -104,18 +113,10 @@ ubuntu:~/environment/todo (dev-server) $  sudo systemctl status mongodb
 May 22 05:05:36 ip-172-31-37-115 systemd[1]: Started An object/document-oriented database.
 ```
 
-#### 3. Generate `.pem` files to use HTTPS (they are included in `.gitignore` by default)
+#### 3. Launch server
 
 ```
-$ cd server
-
-$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
-```
-
-#### 4. Launch server
-
-```
-$ su # Optional: you may need to log on as a superuser because the server uses port 443 on which some systems you need a superuser privilege.
+$ su # Depending on your system, you may need to log on as a superuser if you need an elevation in privilege.
 
 $ cd server
 
@@ -173,5 +174,5 @@ http://35.208.190.165:8081/
 
 ● 접속하여 테스트 가능한 URL
 
-- [ ] heroku(https://www.heroku.com/), AWS(https://aws.amazon.com) 등
+- [x] heroku(https://www.heroku.com/), AWS(https://aws.amazon.com) 등
       서버에 배포하여 기능을 직접 사용해볼 수 있어야 합니다.
