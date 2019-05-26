@@ -3,7 +3,7 @@ import 'dotenv/config'
 
 // Internal
 import { SimpleFetch } from './simpleFetch'
-import { onError } from '../components/ErrorHandler/ErrorHandler'
+import { onError } from '../components/Notifier/Notifier'
 
 const simpleFetch = new SimpleFetch('https://35.208.190.165/')
 
