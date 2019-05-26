@@ -5,7 +5,9 @@ import 'dotenv/config'
 import { SimpleFetch } from './simpleFetch'
 import { onError } from '../components/Notifier/Notifier'
 
-const simpleFetch = new SimpleFetch('https://35.208.190.165/')
+const simpleFetch = new SimpleFetch(
+    process.env.SERVER || 'http://35.208.190.165:8081/'
+)
 
 const getTodos = onError => simpleFetch.getMethod('todo', onError)
 
