@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 // Internal
-import { getTodos } from '../../util/api'
+import { getAndCatchError } from '../../util/api'
 import TodoList from '../TodoList/TodoList'
 import TodoEditor from '../TodoEditor/TodoEditor'
-import { onError } from '../ErrorHandler/ErrorHandler'
 import './App.scss'
 
 const App = () => {
@@ -15,12 +14,9 @@ const App = () => {
         isLoading: false,
     })
 
-    const setRootStateInChild = (key, value) => {
-        setRootState(state => ({
-            ...state,
-            [key]: value,
-        }))
-    }
+    const [updateUtil, setUpdateUtil] = useState(0)
+    const setUpdateUtilInChild = () =>
+        setUpdateUtil(val => (val % 2 ? val + 1 : val - 1))
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,12 +24,7 @@ const App = () => {
                 ...s,
                 isLoading: true,
             }))
-            const todos = await getTodos(() =>
-                onError(
-                    'An error occurred in the server while fetching from it',
-                    fetchData
-                )
-            )
+            const todos = await getAndCatchError()
             setRootState(s => ({
                 ...s,
                 todos,
@@ -41,18 +32,21 @@ const App = () => {
             }))
         }
         fetchData()
-    }, [])
+    }, [updateUtil])
 
     const TodoListComponent = () => (
         <section id="todo-list">
-            <TodoList setRootState={setRootState} rootState={rootState} />
+            <TodoList
+                triggerUpdateFromChild={setUpdateUtilInChild}
+                rootState={rootState}
+            />
         </section>
     )
 
     const TodoEditorComponent = () => (
         <section id="todo-editor">
             <TodoEditor
-                setRootState={setRootStateInChild}
+                triggerUpdateFromChild={setUpdateUtilInChild}
                 rootState={rootState}
             />
         </section>

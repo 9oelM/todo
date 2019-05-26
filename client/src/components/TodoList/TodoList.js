@@ -13,7 +13,7 @@ import './TodoList.scss'
 
 const getTime = date => (date ? new Date(date).getTime() : new Date().getTime())
 
-const TodoList = ({ history, setRootState, rootState }) => {
+const TodoList = ({ history, rootState, triggerUpdateFromChild }) => {
     const { todos, isLoading } = rootState
 
     return (
@@ -25,7 +25,13 @@ const TodoList = ({ history, setRootState, rootState }) => {
                 <p>Add a new todo</p>
             </Button>
             {!isLoading ? (
-                todos.map(todo => <TodoPreview key={si.generate()} {...todo} />)
+                todos.map(todo => (
+                    <TodoPreview
+                        key={si.generate()}
+                        triggerUpdateFromChild={triggerUpdateFromChild}
+                        {...todo}
+                    />
+                ))
             ) : (
                 <p>Loading...</p>
             )}
