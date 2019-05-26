@@ -33,7 +33,7 @@ const TodoList = ({ history, rootState, triggerUpdateFromChild }) => {
                     />
                 ))
             ) : (
-                <p>Loading...</p>
+                <p id="add-todo-loading">Loading...</p>
             )}
         </>
     )
