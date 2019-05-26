@@ -2,7 +2,7 @@
     "name": "client",
     "version": "0.1.0",
     "private": true,
-    "homepage": "./",
+    "homepage": "https://9oelm.github.io/todo",
     "dependencies": {
         "dotenv": "^8.0.0",
         "gh-pages": "^2.0.1",
@@ -27,7 +27,7 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "lint": "prettier --write 'src/**/*'",
-        "predeploy": "npm run build",
+        "predeploy": "PUBLIC_URL=https://9oelm.github.io/todo npm run build",
         "deploy": "gh-pages -d build"
     },
     "eslintConfig": {
