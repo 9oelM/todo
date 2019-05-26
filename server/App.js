@@ -3,8 +3,10 @@ import Express from 'express'
 import BodyParser from 'body-parser'
 import Mongoose from 'mongoose'
 import Cors from 'cors'
-import https from 'https'
-import fs from 'fs'
+
+// for now we are not using https.
+//import https from 'https'
+//import fs from 'fs'
 
 // Internal
 import routes from './routes/index'
@@ -35,7 +37,8 @@ app.get('/', (req, res) => {
   `)
 })
 
-const port = 443
+const port = 8081
+/*
 https
     .createServer(
         {
@@ -44,7 +47,7 @@ https
             passphrase: 'joel',
         },
         app
-    )
-    .listen(port, () => {
-        console.log(`Server listening on port ${port}`)
-    })
+    )*/
+app.listen(port, () => {
+    console.log(`Server listening on port ${port}`)
+})
