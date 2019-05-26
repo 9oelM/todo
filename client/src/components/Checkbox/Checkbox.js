@@ -1,5 +1,6 @@
 // External
 import React from 'react'
+import { PropTypes } from 'prop-types'
 
 // Internal
 import './Checkbox.scss'
@@ -21,5 +22,10 @@ const Checkbox = ({ handleClick, isChecked }) =>
             className="checkbox"
         />
     )
+
+Checkbox.propTypes = {
+    handleClick: PropTypes.func,
+    isChecked: PropTypes.bool,
+}
 
 export default Checkbox

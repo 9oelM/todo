@@ -1,16 +1,13 @@
 // External
-import React, { useEffect, useState, useRef } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router'
 import { PropTypes } from 'prop-types'
 import si from 'shortid'
 
 // Internal
-import { getTodos } from '../../util/api'
 import Button from '../Button/Button'
 import TodoPreview from './TodoPreview/TodoPreview'
 import './TodoList.scss'
-
-const getTime = date => (date ? new Date(date).getTime() : new Date().getTime())
 
 const TodoList = ({ history, rootState, triggerUpdateFromChild }) => {
     const { todos, isLoading } = rootState
@@ -38,6 +35,10 @@ const TodoList = ({ history, rootState, triggerUpdateFromChild }) => {
     )
 }
 
-TodoList.propTypes = {}
+TodoList.propTypes = {
+    history: PropTypes.object,
+    rootState: PropTypes.object,
+    triggerUpdateFromChild: PropTypes.func,
+}
 
 export default withRouter(TodoList)

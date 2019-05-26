@@ -66,4 +66,12 @@ const CalendarButton = ({
     )
 }
 
+CalendarButton.propTypes = {
+    time: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    handleTimeChange: PropTypes.func,
+    handleClickOk: PropTypes.func,
+    className: PropTypes.string,
+    tooltipPosition: PropTypes.string,
+}
+
 export default CalendarButton

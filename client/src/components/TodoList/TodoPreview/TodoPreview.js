@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router'
 import { PropTypes } from 'prop-types'
-import si from 'shortid'
 
 // Internal
 import { updateAndCatchError, deleteAndCatchError } from '../../../util/api'
@@ -21,7 +20,6 @@ const TodoPreview = ({
     priority,
     isDone,
     content,
-    useForceUpdateInChild,
     triggerUpdateFromChild,
     history,
 }) => {
@@ -101,11 +99,14 @@ const TodoPreview = ({
 }
 
 TodoPreview.propTypes = {
-    id: PropTypes.number,
+    _id: PropTypes.string,
     title: PropTypes.string,
-    due: PropTypes.number,
+    due: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     priority: PropTypes.number,
     isDone: PropTypes.bool,
+    content: PropTypes.string,
+    triggerUpdateFromChild: PropTypes.func,
+    history: PropTypes.object,
 }
 
 export default withRouter(TodoPreview)

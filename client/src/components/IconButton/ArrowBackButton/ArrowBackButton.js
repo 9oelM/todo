@@ -18,4 +18,8 @@ const ArrowBackButton = ({ handleClick }) => (
     </div>
 )
 
+ArrowBackButton.propTypes = {
+    handleClick: PropTypes.func,
+}
+
 export default ArrowBackButton

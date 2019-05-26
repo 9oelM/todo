@@ -1,5 +1,6 @@
 // External
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -29,6 +30,14 @@ const Message = ({
         </button>
     </div>
 )
+
+Message.propTypes = {
+    closeToast: PropTypes.func,
+    handleRetry: PropTypes.func,
+    buttonText: PropTypes.string,
+    className: PropTypes.string,
+    children: PropTypes.string,
+}
 
 const onError = (msg, handleRetry) =>
     toast.error(<Message handleRetry={handleRetry}>{msg}</Message>, {

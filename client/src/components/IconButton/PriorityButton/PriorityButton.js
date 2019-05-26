@@ -45,4 +45,10 @@ const PriorityButton = ({
     </div>
 )
 
+PriorityButton.propTypes = {
+    handleClick: PropTypes.func,
+    priority: PropTypes.number,
+    tooltipPosition: PropTypes.string,
+}
+
 export default PriorityButton

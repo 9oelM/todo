@@ -1,5 +1,6 @@
 // External
 import React from 'react'
+import { PropTypes } from 'prop-types'
 
 // svg source: https://material.io/tools/icons/
 
@@ -65,6 +66,9 @@ const Priority = ({ level }) => {
             <path fill="none" d="M0 0h24v24H0z" />
         </svg>
     )
+    Icon.propTypes = {
+        color: PropTypes.string,
+    }
 
     const red = '#ff7070'
     const black = '#353535'
@@ -77,6 +81,10 @@ const Priority = ({ level }) => {
         return <Icon color={black} />
     }
     return <Icon color={selectedColor} />
+}
+
+Priority.propTypes = {
+    level: PropTypes.number,
 }
 
 export { Add, Calendar, Priority, ArrowBack, Delete }

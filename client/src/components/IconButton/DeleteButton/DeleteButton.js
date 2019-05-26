@@ -19,4 +19,9 @@ const DeleteButton = ({ handleClick, className = '' }) => (
     </div>
 )
 
+DeleteButton.propTypes = {
+    handleClick: PropTypes.func,
+    className: PropTypes.string,
+}
+
 export default DeleteButton

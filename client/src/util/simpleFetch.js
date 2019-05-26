@@ -1,5 +1,5 @@
+// External
 import keyMirror from 'keymirror'
-import { toast } from 'react-toastify'
 
 /* global fetch */
 

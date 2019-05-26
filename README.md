@@ -139,7 +139,7 @@ https://5d2fbf9bed8b47c7abc49447f8d8f150.vfs.cloud9.us-east-1.amazonaws.com/
 Server dev (GCP)
 
 ```
-https://35.208.190.165:443/
+http://35.208.190.165:8081/
 ```
 
 ## 요구사항

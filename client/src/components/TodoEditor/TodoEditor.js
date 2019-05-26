@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router'
 import { PropTypes } from 'prop-types'
-import moment from 'moment'
 
 // Internal
 import {
@@ -21,8 +20,6 @@ import Checkbox from '../Checkbox/Checkbox'
 import './TodoEditor.scss'
 
 const TodoEditor = ({ rootState, triggerUpdateFromChild, history, match }) => {
-    const { todos } = rootState
-
     let selectedTodo
     if (match.params.id) {
         selectedTodo = rootState.todos.find(
@@ -153,10 +150,10 @@ const TodoEditor = ({ rootState, triggerUpdateFromChild, history, match }) => {
 }
 
 TodoEditor.propTypes = {
-    title: PropTypes.string,
-    due: PropTypes.number,
-    priority: PropTypes.number,
-    isDone: PropTypes.bool,
+    rootState: PropTypes.object,
+    triggerUpdateFromChild: PropTypes.func,
+    history: PropTypes.object,
+    match: PropTypes.object,
 }
 
 export default withRouter(TodoEditor)
