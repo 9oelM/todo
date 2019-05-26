@@ -1,11 +1,13 @@
 // External
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 // Internal
 import { getAndCatchError } from '../../util/api'
 import TodoList from '../TodoList/TodoList'
 import TodoEditor from '../TodoEditor/TodoEditor'
+import Button from '../Button/Button'
 import './App.scss'
 
 const App = () => {
@@ -52,11 +54,30 @@ const App = () => {
         </section>
     )
 
+    const NoPageFoundComponent = withRouter(({ history }) => (
+        <section id="no-page-found">
+            <div>
+                <p>Oops!</p>
+                <p>Something is wrong.</p>
+                <p>Please try again.</p>
+            </div>
+            <Button handleClick={() => history.push('/')}>
+                Go to the index page
+            </Button>
+        </section>
+    ))
+
     return (
         <Router>
             <div className="App">
-                <Route path="/" exact component={TodoListComponent} />
-                <Route path="/editor/:id?" component={TodoEditorComponent} />
+                <Switch>
+                    <Route path="/" exact component={TodoListComponent} />
+                    <Route
+                        path="/editor/:id?"
+                        component={TodoEditorComponent}
+                    />
+                    <Route component={NoPageFoundComponent} />
+                </Switch>
             </div>
         </Router>
     )
