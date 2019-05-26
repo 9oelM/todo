@@ -76,6 +76,12 @@ $ yarn
 $ yarn start
 ```
 
+#### How to build
+
+```
+$ yarn build
+```
+
 #### Other available commands
 
 ```
