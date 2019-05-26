@@ -13,7 +13,10 @@ const Button = ({ handleClick, children, id = '', className = '' }) => (
 
 Button.propTypes = {
     handleClick: PropTypes.func,
-    children: PropTypes.element,
+    children: PropTypes.oneOfType([
+        PropTypes.element,
+        PropTypes.arrayOf(PropTypes.element),
+    ]),
     id: PropTypes.string,
     className: PropTypes.string,
 }
