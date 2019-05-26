@@ -18,7 +18,6 @@ const CalendarButton = ({
     handleClickOk,
     className = '',
     tooltipPosition = 'left',
-    handleClickOk,
 }) => {
     const [isOpen, setIsOpen] = useState(false)
 

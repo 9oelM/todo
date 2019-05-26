@@ -67,28 +67,6 @@ const App = () => {
         </section>
     ))
 
-    const Todolist = (
-        <section id="todo-list">
-            <TodoList
-                setRootState={setRootStateInChild}
-                rootState={rootState}
-                handleSlideLeft={() => sliderElement.slickNext()}
-            />
-        </section>
-    )
-
-    const TodoEditor = (
-        <section id="todo-editor">
-            <TodoEditor
-                selectedTodo={selectedTodo}
-                setRootState={setRootStateInChild}
-                rootState={rootState}
-                handleSlideRight={() => {
-                    sliderElement.slickPrev()
-                }}
-            />
-        </section>
-    )
     return (
         <Router>
             <div className="App">
