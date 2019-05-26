@@ -68,11 +68,7 @@ const TodoEditor = ({ rootState, triggerUpdateFromChild, history, match }) => {
             match.params.id &&
             confirm('delete this todo')
         ) {
-            deleteAndCatchError(
-                match.params.id,
-
-                triggerUpdateFromChild()
-            )
+            deleteAndCatchError(match.params.id, triggerUpdateFromChild)
             history.push('/')
         } else {
             if (confirm('abort')) {
