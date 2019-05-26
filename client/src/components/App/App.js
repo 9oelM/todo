@@ -1,9 +1,6 @@
 // External
 import React, { useEffect, useState } from 'react'
-import useForceUpdate from 'use-force-update'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 // Internal
 import { getTodos } from '../../util/api'
@@ -14,26 +11,9 @@ import './App.scss'
 
 const App = () => {
     const [rootState, setRootState] = useState({
-        isNewNote: true,
-        updateUtility: 0,
+        todos: [],
+        isLoading: false,
     })
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const todos = await getTodos(() =>
-                onError(
-                    'An error occurred in the server while fetching from it',
-                    fetchData
-                )
-            )
-            console.log(todos)
-            setRootState(state => ({
-                ...state,
-                todos,
-            }))
-        }
-        fetchData()
-    }, [rootState.updateUtility])
 
     const setRootStateInChild = (key, value) => {
         setRootState(state => ({
@@ -42,37 +22,49 @@ const App = () => {
         }))
     }
 
-    const settings = {
-        speed: 500,
-        infinite: false,
-        swipe: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        className: 'app-slider',
-    }
-    let sliderElement
+    useEffect(() => {
+        const fetchData = async () => {
+            setRootState(s => ({
+                ...s,
+                isLoading: true,
+            }))
+            const todos = await getTodos(() =>
+                onError(
+                    'An error occurred in the server while fetching from it',
+                    fetchData
+                )
+            )
+            setRootState(s => ({
+                ...s,
+                todos,
+                isLoading: false,
+            }))
+        }
+        fetchData()
+    }, [])
+
+    const TodoListComponent = () => (
+        <section id="todo-list">
+            <TodoList setRootState={setRootState} rootState={rootState} />
+        </section>
+    )
+
+    const TodoEditorComponent = () => (
+        <section id="todo-editor">
+            <TodoEditor
+                setRootState={setRootStateInChild}
+                rootState={rootState}
+            />
+        </section>
+    )
 
     return (
-        <div className="App">
-            <Slider ref={slider => (sliderElement = slider)} {...settings}>
-                <section id="todo-container">
-                    <TodoList
-                        setRootState={setRootStateInChild}
-                        rootState={rootState}
-                        handleSlideLeft={() => sliderElement.slickNext()}
-                    />
-                </section>
-                <section id="todo-editor">
-                    <TodoEditor
-                        setRootState={setRootStateInChild}
-                        rootState={rootState}
-                        handleSlideRight={() => {
-                            sliderElement.slickPrev()
-                        }}
-                    />
-                </section>
-            </Slider>
-        </div>
+        <Router>
+            <div className="App">
+                <Route path="/" exact component={TodoListComponent} />
+                <Route path="/editor/:id?" component={TodoEditorComponent} />
+            </div>
+        </Router>
     )
 }
 export default App

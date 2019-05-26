@@ -1,5 +1,6 @@
 // External
 import React, { useState } from 'react'
+import { withRouter } from 'react-router'
 import { PropTypes } from 'prop-types'
 import moment from 'moment'
 import si from 'shortid'
@@ -22,10 +23,9 @@ const TodoPreview = ({
     priority,
     isDone,
     content,
-    setRootState,
-    updateUtility,
-    handleSlideLeft,
+    history,
 }) => {
+    console.log(_id)
     const [tempState, setTempState] = useState({
         title,
         due,
@@ -47,7 +47,6 @@ const TodoPreview = ({
                 updateAndCatchError(id)
             )
         )
-        setRootState('updateUtility', updateUtility + 1)
     }
 
     const deleteAndCatchError = async id => {
@@ -56,11 +55,10 @@ const TodoPreview = ({
                 deleteAndCatchError(id)
             )
         )
-        setRootState('updateUtility', updateUtility + 1)
     }
 
     return (
-        <Button handleClick={handleSlideLeft}>
+        <Button handleClick={() => history.push(`/editor/${_id}`)}>
             <Checkbox
                 isChecked={isDone}
                 handleClick={async () =>
@@ -85,9 +83,9 @@ const TodoPreview = ({
                 handleTimeChange={moment =>
                     handleChange('due', moment.valueOf())
                 }
-                updateAndCatchError={async () =>
+                handleClickOk={async due =>
                     await updateAndCatchError(_id, {
-                        due: tempState.due,
+                        due, // NOTE: the state for due property is managed inside CalendarButton component.
                         isDone,
                         title,
                         priority,
@@ -96,7 +94,19 @@ const TodoPreview = ({
                 }
                 className="leftmost-button"
             />
-            <PriorityButton priority={priority} />
+            <PriorityButton
+                priority={tempState.priority}
+                handleClick={async priority => {
+                    handleChange('priority', priority)
+                    await updateAndCatchError(_id, {
+                        priority: priority,
+                        due,
+                        isDone,
+                        title,
+                        content,
+                    })
+                }}
+            />
             <DeleteButton
                 className="margin-right"
                 handleClick={async () => await deleteAndCatchError(_id)}
@@ -113,4 +123,4 @@ TodoPreview.propTypes = {
     isDone: PropTypes.bool,
 }
 
-export default TodoPreview
+export default withRouter(TodoPreview)

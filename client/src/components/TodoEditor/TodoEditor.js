@@ -1,5 +1,6 @@
 // External
 import React, { useState } from 'react'
+import { withRouter } from 'react-router'
 import { PropTypes } from 'prop-types'
 import moment from 'moment'
 
@@ -15,22 +16,22 @@ import Checkbox from '../Checkbox/Checkbox'
 
 import './TodoEditor.scss'
 
-const TodoEditor = ({ rootState, setRootState, handleSlideRight }) => {
+const TodoEditor = ({ rootState, setRootState, history, match }) => {
+    const { todos } = rootState
+
     const initialTempState = {
         title: '',
         content: '',
-        due: moment(),
+        due: moment(), // NOTE: not set yet
         priority: 3,
         isDone: false,
     }
 
     const [tempState, setTempState] = useState(initialTempState)
-
     const { title, content, due, priority, isDone } = tempState
 
-    const { isNewNote, updateUtility, todos } = rootState
-
     const handleChange = (key, value) => {
+        console.log(key, value)
         setTempState(state => ({
             ...state,
             [key]: value,
@@ -38,9 +39,13 @@ const TodoEditor = ({ rootState, setRootState, handleSlideRight }) => {
     }
 
     const handleAbort = () => {
-        if (isNewNote && window.confirm('Are you sure you want to abort?')) {
-            setTempState(() => initialTempState)
-            handleSlideRight()
+        if (window.confirm('Are you sure you want to abort?')) {
+            if (!match.params._id) {
+                setTempState(() => initialTempState)
+                history.push('/')
+            } else {
+                history.push('/')
+            }
         }
     }
 
@@ -53,6 +58,7 @@ const TodoEditor = ({ rootState, setRootState, handleSlideRight }) => {
                     time={due}
                     handleTimeChange={moment => handleChange('due', moment)}
                     tooltipPosition="bottom"
+                    handleClick
                 />
                 <PriorityButton
                     priority={priority}
@@ -91,12 +97,10 @@ const TodoEditor = ({ rootState, setRootState, handleSlideRight }) => {
                                     onError(requestCreateTodoAndHandleError)
                                 )
                             }
-                            if (isNewNote) {
+                            if (!match.params.id) {
                                 // createTodo
                                 await requestCreateTodoAndHandleError()
-                                handleSlideRight()
-                                // NOTE: this part is essential to invoke another getTodos()
-                                setRootState('updateUtility', updateUtility + 1)
+                                history.push('/')
                             } else {
                                 // updateTodo
                             }
@@ -117,4 +121,4 @@ TodoEditor.propTypes = {
     isDone: PropTypes.bool,
 }
 
-export default TodoEditor
+export default withRouter(TodoEditor)
