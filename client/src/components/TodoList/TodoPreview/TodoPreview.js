@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router'
 import { PropTypes } from 'prop-types'
-import moment from 'moment'
 import si from 'shortid'
 
 // Internal
@@ -95,7 +94,6 @@ const TodoPreview = ({
                 className="margin-right"
                 handleClick={async () => {
                     await deleteAndCatchError(_id, triggerUpdateFromChild)
-                    triggerUpdateFromChild()
                 }}
             />
         </Button>

@@ -10,7 +10,7 @@ import {
     updateAndCatchError,
     deleteAndCatchError,
 } from '../../util/api'
-import { onError, onInfo } from '../ErrorHandler/ErrorHandler'
+import { onInfo } from '../Notifier/Notifier'
 import ArrowBackButton from '../IconButton/ArrowBackButton/ArrowBackButton'
 import CalendarButton from '../IconButton/CalendarButton/CalendarButton'
 import DeleteButton from '../IconButton/DeleteButton/DeleteButton'

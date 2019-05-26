@@ -6,7 +6,6 @@ import si from 'shortid'
 
 // Internal
 import { getTodos } from '../../util/api'
-import { onError } from '../ErrorHandler/ErrorHandler'
 import Button from '../Button/Button'
 import TodoPreview from './TodoPreview/TodoPreview'
 import './TodoList.scss'
