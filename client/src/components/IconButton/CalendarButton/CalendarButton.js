@@ -20,9 +20,11 @@ const CalendarButton = ({
     tooltipPosition = 'left',
 }) => {
     const [isOpen, setIsOpen] = useState(false)
-
     const [due, setDue] = useState(time)
-
+    let isDueNotSetYet = due === ''
+    if (isDueNotSetYet) {
+        setDue(() => moment().valueOf())
+    }
     return (
         <div
             onClick={e => {
@@ -32,30 +34,32 @@ const CalendarButton = ({
             className={`icon-button todo-calendar ${className}`}
         >
             <Tooltip
+                isOpen={isOpen}
                 html={
                     <div className="todo-set-due">
-                        <p>Set a due date for this todo</p>
+                        <p>Set a date for this todo</p>
                         <DatetimePicker
-                            moment={moment(due)}
+                            moment={moment(due, 'x')}
                             onChange={moment => {
                                 setDue(() => moment.valueOf())
                             }}
                         />
                         <Button
                             className="calendar-ok-button"
-                            handleClick={async () => {
-                                if (handleClickOk) await handleClickOk
+                            handleClick={e => {
+                                e.stopPropagation()
+                                if (handleClickOk) handleClickOk(due)
                                 setIsOpen(() => false)
                             }}
                         >
-                            <p>OK</p>
+                            <p>Set due</p>
                         </Button>
                     </div>
                 }
+                onRequestClose={() => setIsOpen(false)}
                 interactive
                 position={tooltipPosition}
                 trigger="click"
-                isOpen={isOpen}
             >
                 <CalendarIcon />
             </Tooltip>

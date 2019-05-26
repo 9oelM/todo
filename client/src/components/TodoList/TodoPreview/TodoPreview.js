@@ -26,7 +26,6 @@ const TodoPreview = ({
     triggerUpdateFromChild,
     history,
 }) => {
-    console.log(_id)
     const [tempState, setTempState] = useState({
         title,
         due,
@@ -51,10 +50,6 @@ const TodoPreview = ({
                         _id,
                         {
                             isDone: !isDone,
-                            title,
-                            due,
-                            priority,
-                            content,
                         },
                         triggerUpdateFromChild
                     )
@@ -68,19 +63,15 @@ const TodoPreview = ({
                 <div className="todo-preview-title">{title}</div>
             )}
             <CalendarButton
-                time={moment(tempState.due)}
+                time={tempState.due}
                 handleTimeChange={moment =>
                     handleChange('due', moment.valueOf())
                 }
-                handleClickOk={async due =>
+                handleClickOk={async dueInChild =>
                     await updateAndCatchError(
                         _id,
                         {
-                            due, // NOTE: the state for due property is managed inside CalendarButton component.
-                            isDone,
-                            title,
-                            priority,
-                            content,
+                            due: dueInChild, // NOTE: the state for due property is managed inside CalendarButton component.
                         },
                         triggerUpdateFromChild
                     )
@@ -94,11 +85,7 @@ const TodoPreview = ({
                     await updateAndCatchError(
                         _id,
                         {
-                            priority: priority,
-                            due,
-                            isDone,
-                            title,
-                            content,
+                            priority,
                         },
                         triggerUpdateFromChild
                     )

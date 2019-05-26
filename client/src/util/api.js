@@ -20,36 +20,26 @@ const deleteTodo = (todoId, onError) =>
 
 const getAndCatchError = async () =>
     await getTodos(() =>
-        onError(
-            'An error occurred in the server while fetching from it',
-            getAndCatchError
-        )
+        onError('An error occurred fetching from the server', getAndCatchError)
     )
 
 const createAndCatchError = async (sendObj, cb) => {
     await createTodo(sendObj, () =>
-        onError(
-            'An error occurred in the server while saving todo.',
-            createAndCatchError
-        )
+        onError('An error occurred saving todo.', createAndCatchError)
     )
     cb()
 }
 
 const updateAndCatchError = async (id, sendObj, cb) => {
     await updateTodo(id, sendObj, () =>
-        onError('An error occurred in the server while updating', () =>
-            updateAndCatchError(id)
-        )
+        onError('An error occurred updating', () => updateAndCatchError(id))
     )
     cb()
 }
 
 const deleteAndCatchError = async (id, cb) => {
     await deleteTodo(id, () =>
-        onError('An error occurred in the server while deleting.', () =>
-            deleteAndCatchError(id)
-        )
+        onError('An error occurred deleting.', () => deleteAndCatchError(id))
     )
     cb()
 }

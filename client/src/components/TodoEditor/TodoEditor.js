@@ -44,11 +44,12 @@ const TodoEditor = ({ rootState, triggerUpdateFromChild, history, match }) => {
             : {
                   title: '',
                   content: '',
-                  due: moment(), // NOTE: not set yet
+                  due: '',
                   priority: 3,
                   isDone: false,
               }
-    console.log(initialTempState)
+
+    const [chosenToSetDue, setChosenToSetDue] = useState(false)
     const [tempState, setTempState] = useState(initialTempState)
     const { title, content, due, priority, isDone } = tempState
 
@@ -91,9 +92,11 @@ const TodoEditor = ({ rootState, triggerUpdateFromChild, history, match }) => {
                 />
                 <CalendarButton
                     time={due}
-                    handleTimeChange={moment => handleChange('due', moment)}
+                    handleClickOk={moment => {
+                        handleChange('due', moment.valueOf())
+                        setChosenToSetDue(() => true)
+                    }}
                     tooltipPosition="bottom"
-                    handleClick
                 />
                 <PriorityButton
                     priority={priority}
@@ -129,7 +132,10 @@ const TodoEditor = ({ rootState, triggerUpdateFromChild, history, match }) => {
                         } else {
                             if (!match.params.id) {
                                 await createAndCatchError(
-                                    tempState,
+                                    {
+                                        ...tempState,
+                                        due: chosenToSetDue ? due : '',
+                                    },
                                     triggerUpdateFromChild
                                 )
                             } else {
