@@ -15,20 +15,29 @@ import Checkbox from '../Checkbox/Checkbox'
 
 import './TodoEditor.scss'
 
-const TodoEditor = ({ rootState, setRootState, handleSlideRight }) => {
-    const initialTempState = {
-        title: '',
-        content: '',
-        due: moment(),
-        priority: 3,
-        isDone: false,
-    }
+const TodoEditor = ({
+    selectedTodo,
+    rootState,
+    setRootState,
+    handleSlideRight,
+}) => {
+    const { updateUtility, todos } = rootState
+
+    console.log(selectedTodo)
+    const initialTempState = selectedTodo
+        ? {
+              ...selectedTodo,
+          }
+        : {
+              title: '',
+              content: '',
+              due: moment(),
+              priority: 3,
+              isDone: false,
+          }
 
     const [tempState, setTempState] = useState(initialTempState)
-
     const { title, content, due, priority, isDone } = tempState
-
-    const { isNewNote, updateUtility, todos } = rootState
 
     const handleChange = (key, value) => {
         setTempState(state => ({
@@ -38,9 +47,13 @@ const TodoEditor = ({ rootState, setRootState, handleSlideRight }) => {
     }
 
     const handleAbort = () => {
-        if (isNewNote && window.confirm('Are you sure you want to abort?')) {
-            setTempState(() => initialTempState)
-            handleSlideRight()
+        if (window.confirm('Are you sure you want to abort?')) {
+            if (!selectedTodo) {
+                setTempState(() => initialTempState)
+                handleSlideRight()
+            } else {
+                handleSlideRight()
+            }
         }
     }
 
@@ -91,7 +104,7 @@ const TodoEditor = ({ rootState, setRootState, handleSlideRight }) => {
                                     onError(requestCreateTodoAndHandleError)
                                 )
                             }
-                            if (isNewNote) {
+                            if (!selectedTodo) {
                                 // createTodo
                                 await requestCreateTodoAndHandleError()
                                 handleSlideRight()

@@ -60,7 +60,11 @@ const TodoPreview = ({
     }
 
     return (
-        <Button handleClick={handleSlideLeft}>
+        <Button
+            handleClick={() => {
+                setRootState('selectedTodoId', _id, () => handleSlideLeft())
+            }}
+        >
             <Checkbox
                 isChecked={isDone}
                 handleClick={async () =>

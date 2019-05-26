@@ -1,5 +1,6 @@
 // External
 import React, { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -13,7 +14,9 @@ import './App.scss'
 
 const App = () => {
     const [rootState, setRootState] = useState({
+        todos: [],
         isNewNote: true,
+        selectedTodoId: -1,
         updateUtility: 0,
     })
 
@@ -33,11 +36,14 @@ const App = () => {
         fetchData()
     }, [rootState.updateUtility])
 
-    const setRootStateInChild = (key, value) => {
-        setRootState(state => ({
-            ...state,
-            [key]: value,
-        }))
+    const setRootStateInChild = (key, value, callback) => {
+        setRootState(
+            state => ({
+                ...state,
+                [key]: value,
+            }),
+            callback
+        )
     }
 
     const settings = {
@@ -49,27 +55,36 @@ const App = () => {
         className: 'app-slider',
     }
     let sliderElement
+    const selectedTodo = rootState.todos.find(
+        ({ _id }) => _id === rootState.selectedTodoId
+    )
 
+    const Todolist = (
+        <section id="todo-list">
+            <TodoList
+                setRootState={setRootStateInChild}
+                rootState={rootState}
+                handleSlideLeft={() => sliderElement.slickNext()}
+            />
+        </section>
+    )
+
+    const TodoEditor = (
+        <section id="todo-editor">
+            <TodoEditor
+                selectedTodo={selectedTodo}
+                setRootState={setRootStateInChild}
+                rootState={rootState}
+                handleSlideRight={() => {
+                    sliderElement.slickPrev()
+                }}
+            />
+        </section>
+    )
     return (
         <div className="App">
-            <Slider ref={slider => (sliderElement = slider)} {...settings}>
-                <section id="todo-container">
-                    <TodoList
-                        setRootState={setRootStateInChild}
-                        rootState={rootState}
-                        handleSlideLeft={() => sliderElement.slickNext()}
-                    />
-                </section>
-                <section id="todo-editor">
-                    <TodoEditor
-                        setRootState={setRootStateInChild}
-                        rootState={rootState}
-                        handleSlideRight={() => {
-                            sliderElement.slickPrev()
-                        }}
-                    />
-                </section>
-            </Slider>
+            <Route path="/" exact component={TodoList} />
+            <Route path="/:id" component={TodoEditor} />
         </div>
     )
 }
