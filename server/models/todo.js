@@ -1,12 +1,13 @@
 import Mongoose from 'mongoose'
-const Schema = Mongoose.Schema
+const { Schema } = Mongoose
+const { Mixed } = Schema.Types
 
 let TodoSchema = new Schema({
     title: String,
     content: String,
     priority: Number,
     isDone: Boolean,
-    due: Number,
+    due: Mixed,
     lastUpdated: Number,
     // due and lastUpdated represent the number of milliseconds since the Unix Epoch.
 })
