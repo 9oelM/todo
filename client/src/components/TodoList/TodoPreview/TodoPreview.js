@@ -1,12 +1,12 @@
 // External
 import React, { useState } from 'react'
+import { withRouter } from 'react-router'
 import { PropTypes } from 'prop-types'
 import moment from 'moment'
 import si from 'shortid'
 
 // Internal
-import { updateTodo, deleteTodo } from '../../../util/api'
-import { onError } from '../../ErrorHandler/ErrorHandler'
+import { updateAndCatchError, deleteAndCatchError } from '../../../util/api'
 import Button from '../../Button/Button'
 import Checkbox from '../../Checkbox/Checkbox'
 import CalendarButton from '../../IconButton/CalendarButton/CalendarButton'
@@ -22,10 +22,11 @@ const TodoPreview = ({
     priority,
     isDone,
     content,
-    setRootState,
-    updateUtility,
-    handleSlideLeft,
+    useForceUpdateInChild,
+    triggerUpdateFromChild,
+    history,
 }) => {
+    console.log(_id)
     const [tempState, setTempState] = useState({
         title,
         due,
@@ -41,41 +42,23 @@ const TodoPreview = ({
         }))
     }
 
-    const updateAndCatchError = async (id, sendObj) => {
-        await updateTodo(id, sendObj, () =>
-            onError('An error occurred in the server while updating', () =>
-                updateAndCatchError(id)
-            )
-        )
-        setRootState('updateUtility', updateUtility + 1)
-    }
-
-    const deleteAndCatchError = async id => {
-        await deleteTodo(id, () =>
-            onError('An error occurred in the server while deleting.', () =>
-                deleteAndCatchError(id)
-            )
-        )
-        setRootState('updateUtility', updateUtility + 1)
-    }
-
     return (
-        <Button
-            handleClick={() => {
-                setRootState('selectedTodoId', _id, () => handleSlideLeft())
-            }}
-        >
+        <Button handleClick={() => history.push(`/editor/${_id}`)}>
             <Checkbox
                 isChecked={isDone}
-                handleClick={async () =>
-                    updateAndCatchError(_id, {
-                        isDone: !isDone,
-                        title,
-                        due,
-                        priority,
-                        content,
-                    })
-                }
+                handleClick={async () => {
+                    updateAndCatchError(
+                        _id,
+                        {
+                            isDone: !isDone,
+                            title,
+                            due,
+                            priority,
+                            content,
+                        },
+                        triggerUpdateFromChild
+                    )
+                }}
             />
             {isDone ? (
                 <div className="todo-preview-title">
@@ -90,13 +73,17 @@ const TodoPreview = ({
                     handleChange('due', moment.valueOf())
                 }
                 handleClickOk={async due =>
-                    await updateAndCatchError(_id, {
-                        due, // NOTE: the state for due property is managed inside CalendarButton component.
-                        isDone,
-                        title,
-                        priority,
-                        content,
-                    })
+                    await updateAndCatchError(
+                        _id,
+                        {
+                            due, // NOTE: the state for due property is managed inside CalendarButton component.
+                            isDone,
+                            title,
+                            priority,
+                            content,
+                        },
+                        triggerUpdateFromChild
+                    )
                 }
                 className="leftmost-button"
             />
@@ -104,18 +91,25 @@ const TodoPreview = ({
                 priority={tempState.priority}
                 handleClick={async priority => {
                     handleChange('priority', priority)
-                    await updateAndCatchError(_id, {
-                        priority: priority,
-                        due,
-                        isDone,
-                        title,
-                        content,
-                    })
+                    await updateAndCatchError(
+                        _id,
+                        {
+                            priority: priority,
+                            due,
+                            isDone,
+                            title,
+                            content,
+                        },
+                        triggerUpdateFromChild
+                    )
                 }}
             />
             <DeleteButton
                 className="margin-right"
-                handleClick={async () => await deleteAndCatchError(_id)}
+                handleClick={async () => {
+                    await deleteAndCatchError(_id, triggerUpdateFromChild)
+                    triggerUpdateFromChild()
+                }}
             />
         </Button>
     )
@@ -129,4 +123,4 @@ TodoPreview.propTypes = {
     isDone: PropTypes.bool,
 }
 
-export default TodoPreview
+export default withRouter(TodoPreview)

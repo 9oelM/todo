@@ -18,6 +18,7 @@ const CalendarButton = ({
     handleClickOk,
     className = '',
     tooltipPosition = 'left',
+    handleClickOk,
 }) => {
     const [isOpen, setIsOpen] = useState(false)
 
@@ -44,9 +45,7 @@ const CalendarButton = ({
                         <Button
                             className="calendar-ok-button"
                             handleClick={async () => {
-                                if (handleClickOk) {
-                                    await handleClickOk(due)
-                                }
+                                if (handleClickOk) await handleClickOk
                                 setIsOpen(() => false)
                             }}
                         >

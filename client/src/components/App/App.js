@@ -1,63 +1,71 @@
 // External
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 // Internal
-import { getTodos } from '../../util/api'
+import { getAndCatchError } from '../../util/api'
 import TodoList from '../TodoList/TodoList'
 import TodoEditor from '../TodoEditor/TodoEditor'
-import { onError } from '../ErrorHandler/ErrorHandler'
+import Button from '../Button/Button'
 import './App.scss'
 
 const App = () => {
     const [rootState, setRootState] = useState({
         todos: [],
-        isNewNote: true,
-        selectedTodoId: -1,
-        updateUtility: 0,
+        isLoading: false,
     })
+
+    const [updateUtil, setUpdateUtil] = useState(0)
+    const setUpdateUtilInChild = () =>
+        setUpdateUtil(val => (val % 2 ? val + 1 : val - 1))
 
     useEffect(() => {
         const fetchData = async () => {
-            const todos = await getTodos(() =>
-                onError(
-                    'An error occurred in the server while fetching from it',
-                    fetchData
-                )
-            )
-            setRootState(state => ({
-                ...state,
+            setRootState(s => ({
+                ...s,
+                isLoading: true,
+            }))
+            const todos = await getAndCatchError()
+            setRootState(s => ({
+                ...s,
                 todos,
+                isLoading: false,
             }))
         }
         fetchData()
-    }, [rootState.updateUtility])
+    }, [updateUtil])
 
-    const setRootStateInChild = (key, value, callback) => {
-        setRootState(
-            state => ({
-                ...state,
-                [key]: value,
-            }),
-            callback
-        )
-    }
-
-    const settings = {
-        speed: 500,
-        infinite: false,
-        swipe: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        className: 'app-slider',
-    }
-    let sliderElement
-    const selectedTodo = rootState.todos.find(
-        ({ _id }) => _id === rootState.selectedTodoId
+    const TodoListComponent = () => (
+        <section id="todo-list">
+            <TodoList
+                triggerUpdateFromChild={setUpdateUtilInChild}
+                rootState={rootState}
+            />
+        </section>
     )
+
+    const TodoEditorComponent = () => (
+        <section id="todo-editor">
+            <TodoEditor
+                triggerUpdateFromChild={setUpdateUtilInChild}
+                rootState={rootState}
+            />
+        </section>
+    )
+
+    const NoPageFoundComponent = withRouter(({ history }) => (
+        <section id="no-page-found">
+            <div>
+                <p>Oops!</p>
+                <p>Something is wrong.</p>
+                <p>Please try again.</p>
+            </div>
+            <Button handleClick={() => history.push('/')}>
+                Go to the index page
+            </Button>
+        </section>
+    ))
 
     const Todolist = (
         <section id="todo-list">
@@ -82,10 +90,18 @@ const App = () => {
         </section>
     )
     return (
-        <div className="App">
-            <Route path="/" exact component={TodoList} />
-            <Route path="/:id" component={TodoEditor} />
-        </div>
+        <Router>
+            <div className="App">
+                <Switch>
+                    <Route path="/" exact component={TodoListComponent} />
+                    <Route
+                        path="/editor/:id?"
+                        component={TodoEditorComponent}
+                    />
+                    <Route component={NoPageFoundComponent} />
+                </Switch>
+            </div>
+        </Router>
     )
 }
 export default App
