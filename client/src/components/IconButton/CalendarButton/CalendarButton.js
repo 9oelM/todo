@@ -34,7 +34,6 @@ const CalendarButton = ({
             className={`icon-button todo-calendar ${className}`}
         >
             <Tooltip
-                isOpen={isOpen}
                 html={
                     <div className="todo-set-due">
                         <p>Set a date for this todo</p>
@@ -56,7 +55,7 @@ const CalendarButton = ({
                         </Button>
                     </div>
                 }
-                onRequestClose={() => setIsOpen(false)}
+                isOpen={isOpen}
                 interactive
                 position={tooltipPosition}
                 trigger="click"
