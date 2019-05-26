@@ -27,21 +27,27 @@ const getAndCatchError = async () =>
 
 const createAndCatchError = async (sendObj, cb) => {
     await createTodo(sendObj, () =>
-        onError('An error occurred saving todo.', createAndCatchError)
+        onError('An error occurred saving todo.', () =>
+            createAndCatchError(sendObj, cb)
+        )
     )
     cb()
 }
 
 const updateAndCatchError = async (id, sendObj, cb) => {
     await updateTodo(id, sendObj, () =>
-        onError('An error occurred updating', () => updateAndCatchError(id))
+        onError('An error occurred updating', () =>
+            updateAndCatchError(id, sendObj, cb)
+        )
     )
     cb()
 }
 
 const deleteAndCatchError = async (id, cb) => {
     await deleteTodo(id, () =>
-        onError('An error occurred deleting.', () => deleteAndCatchError(id))
+        onError('An error occurred deleting.', () =>
+            deleteAndCatchError(id, cb)
+        )
     )
     cb()
 }
