@@ -44,7 +44,7 @@ Release:        18.04
 Codename:       bionic
 ```
 
-Make sure you have installed latest version of `node` and `yarn`
+Make sure you have installed latest version of `node` (v12.3.0) and `yarn`
 
 ```bash
 $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash # install nvm
