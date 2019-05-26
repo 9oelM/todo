@@ -129,6 +129,30 @@ $ cd server
 $ yarn start
 ```
 
+#### 4. Launch server in production mode (optional)
+
+First, gain ssh connection to a GCP Compute engine instance.
+
+Then:
+
+```
+yarn prod
+```
+
+to launch the server with `forever`.
+
+View log with `forever`:
+
+```
+yarn prod:log
+```
+
+Stop the server:
+
+```
+yarn prod:stop
+```
+
 #### Other available commands
 
 ```

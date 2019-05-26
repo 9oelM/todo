@@ -6,7 +6,9 @@
     "scripts": {
         "start": "babel-node ./App.js",
         "lint": "prettier --write './**/*.js'",
-        "prod": "./node_modules/.bin/forever logs start -f -c \"yarn start\" ./"
+        "prod": "./node_modules/.bin/forever start -c 'yarn start' ./",
+        "prod:log": "./node_modules/.bin/forever logs 0",
+        "prod:stop": "./node_modules/.bin/forever stopall"
     },
     "dependencies": {
         "@babel/node": "^7.4.5",
