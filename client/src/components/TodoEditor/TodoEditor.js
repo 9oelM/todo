@@ -49,7 +49,6 @@ const TodoEditor = ({ rootState, triggerUpdateFromChild, history, match }) => {
                   isDone: false,
               }
     console.log(initialTempState)
-
     const [tempState, setTempState] = useState(initialTempState)
     const { title, content, due, priority, isDone } = tempState
 

@@ -115,6 +115,8 @@ $ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
 #### 4. Launch server
 
 ```
+$ su # Optional: you may need to log on as a superuser because the server uses port 443 on which some systems you need a superuser privilege.
+
 $ cd server
 
 $ yarn start
@@ -128,16 +130,16 @@ $ yarn start|lint
 
 ## Etc (for myself)
 
-Front dev: `localhost:8080`
+Front dev (AWS)
 
 ```
 https://5d2fbf9bed8b47c7abc49447f8d8f150.vfs.cloud9.us-east-1.amazonaws.com/
 ```
 
-Server dev: `localhost:8081`
+Server dev (GCP)
 
 ```
-https://5d2fbf9bed8b47c7abc49447f8d8f150.vfs.cloud9.us-east-1.amazonaws.com:8081/
+https://35.208.190.165:443/
 ```
 
 ## 요구사항

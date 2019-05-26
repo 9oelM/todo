@@ -63,19 +63,20 @@ const getTodos = (req, res) => {
 }
 
 const createTodo = (req, res) => {
-    const { title, content, priority, completed, due } = req.body
+    const { title, content, due, priority, isDone } = req.body
     const todo = new Todo({
-        lastUpdated: getTime(),
         title,
         content,
         priority,
-        completed,
-        due,
+        isDone,
+        due: getTime(due),
+        lastUpdated: getTime(),
     })
+    console.log(todo)
     todo.save(err => {
         if (err) {
             logInfo(WORDS.CREATE, WORDS.FAILURE)
-            res.status(STATUS.CREATED).json(WORDS.FAILURE)
+            res.status(STATUS.SERVER_ERROR).json(WORDS.FAILURE)
         } else {
             res.status(STATUS.CREATED).json(WORDS.SUCCESS)
             logInfo(WORDS.CREATE, WORDS.SUCCESS, () => log(todo))
@@ -84,15 +85,20 @@ const createTodo = (req, res) => {
 }
 
 const updateTodo = (req, res) => {
-    Todo.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, todo) => {
-        if (err) {
-            logInfo(WORDS.UPDATE, WORDS.FAILURE)
-            res.status(STATUS.SERVER_ERROR).json(WORDS.FAILURE)
-        } else {
-            res.status(STATUS.OK).json(WORDS.SUCCESS)
-            logInfo(WORDS.UPDATE, WORDS.SUCCESS, () => log(todo))
+    Todo.findByIdAndUpdate(
+        req.params.id,
+        { $set: { ...req.body, lastUpdated: getTime() } },
+        { useFindAndModify: false },
+        (err, todo) => {
+            if (err) {
+                logInfo(WORDS.UPDATE, WORDS.FAILURE)
+                res.status(STATUS.SERVER_ERROR).json(WORDS.FAILURE)
+            } else {
+                res.status(STATUS.OK).json(WORDS.SUCCESS)
+                logInfo(WORDS.UPDATE, WORDS.SUCCESS, () => log(todo))
+            }
         }
-    })
+    )
 }
 
 const deleteTodo = (req, res) => {
