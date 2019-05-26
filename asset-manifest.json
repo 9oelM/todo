@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/todo/static/css/main.760391f1.chunk.css",
+    "main.js": "/todo/static/js/main.1f5556bd.chunk.js",
+    "main.js.map": "/todo/static/js/main.1f5556bd.chunk.js.map",
+    "runtime~main.js": "/todo/static/js/runtime~main.7a2dc5ec.js",
+    "runtime~main.js.map": "/todo/static/js/runtime~main.7a2dc5ec.js.map",
+    "static/css/2.fcee8749.chunk.css": "/todo/static/css/2.fcee8749.chunk.css",
+    "static/js/2.3bf73d92.chunk.js": "/todo/static/js/2.3bf73d92.chunk.js",
+    "static/js/2.3bf73d92.chunk.js.map": "/todo/static/js/2.3bf73d92.chunk.js.map",
+    "index.html": "/todo/index.html",
+    "precache-manifest.bbf4e37f3f13dfaf7aa8dc71acb84608.js": "/todo/precache-manifest.bbf4e37f3f13dfaf7aa8dc71acb84608.js",
+    "service-worker.js": "/todo/service-worker.js",
+    "static/css/2.fcee8749.chunk.css.map": "/todo/static/css/2.fcee8749.chunk.css.map",
+    "static/css/main.760391f1.chunk.css.map": "/todo/static/css/main.760391f1.chunk.css.map",
+    "static/media/roboto-fontface.css": "/todo/static/media/Roboto-ThinItalic.8a96edbb.woff"
+  }
+}
