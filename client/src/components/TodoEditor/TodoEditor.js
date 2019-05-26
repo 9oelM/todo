@@ -23,17 +23,31 @@ import './TodoEditor.scss'
 const TodoEditor = ({ rootState, triggerUpdateFromChild, history, match }) => {
     const { todos } = rootState
 
-    const initialTempState = match.params.id
-        ? {
-              ...rootState.todos.find(({ _id }) => _id === match.params.id),
-          }
-        : {
-              title: '',
-              content: '',
-              due: moment(), // NOTE: not set yet
-              priority: 3,
-              isDone: false,
-          }
+    let selectedTodo
+    if (match.params.id) {
+        selectedTodo = rootState.todos.find(
+            ({ _id }) => _id === match.params.id
+        )
+        if (!selectedTodo) {
+            onInfo(
+                'This URL contains an invalid Todo ID. You are redirected to be allowed to create a new valid todo.'
+            )
+            setTimeout(history.push('/editor'), 5000)
+        }
+    }
+
+    const initialTempState =
+        match.params.id && selectedTodo
+            ? {
+                  ...selectedTodo,
+              }
+            : {
+                  title: '',
+                  content: '',
+                  due: moment(), // NOTE: not set yet
+                  priority: 3,
+                  isDone: false,
+              }
     console.log(initialTempState)
 
     const [tempState, setTempState] = useState(initialTempState)
@@ -61,8 +75,10 @@ const TodoEditor = ({ rootState, triggerUpdateFromChild, history, match }) => {
             )
             history.push('/')
         } else {
-            if (confirm('abort')) setTempState(() => initialTempState)
-            history.push('/')
+            if (confirm('abort')) {
+                setTempState(() => initialTempState)
+                history.push('/')
+            }
         }
     }
 
