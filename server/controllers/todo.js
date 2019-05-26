@@ -69,7 +69,7 @@ const createTodo = (req, res) => {
         content,
         priority,
         isDone,
-        due: getTime(due),
+        due,
         lastUpdated: getTime(),
     })
     console.log(todo)
