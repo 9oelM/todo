@@ -131,9 +131,24 @@ $ yarn start
 
 #### 4. Launch server in production mode (optional)
 
-First, gain ssh connection to a GCP Compute engine instance.
+1. Gain ssh connection to a GCP Compute engine instance.
+2. Run:
 
-Then:
+```
+apt-get update
+apt-get upgrade
+apt-get install screen
+```
+
+3. Run:
+
+```
+screen
+```
+
+Then you are going to get another screen.
+
+4. Run:
 
 ```
 yarn prod
@@ -151,6 +166,16 @@ Stop the server:
 
 ```
 yarn prod:stop
+```
+
+5. Type `Ctrl + A`, and then `Ctrl + D` to detach from the current screen.
+
+6. You can now close the ssh terminal. The server will not terminate until you again connect via ssh and close the detached session.
+
+7. Kill the detached sessions (shut down the server):
+
+```
+screen -ls | grep pts | cut -d. -f1 | awk '{print $1}' | xargs kill
 ```
 
 #### Other available commands
