@@ -2,7 +2,7 @@
     "name": "client",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://9oelm.github.io/todo",
+    "homepage": "./",
     "dependencies": {
         "dotenv": "^8.0.0",
         "gh-pages": "^2.0.1",
