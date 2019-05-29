@@ -1,13 +1,8 @@
-// External
-import 'dotenv/config'
-
 // Internal
 import { SimpleFetch } from './simpleFetch'
 import { onError } from '../components/Notifier/Notifier'
 
-const simpleFetch = new SimpleFetch(
-    process.env.SERVER || 'http://35.208.190.165:8081/'
-)
+const simpleFetch = new SimpleFetch('https://server.joelmun.now.sh/')
 
 const getTodos = onError => simpleFetch.getMethod('todo', onError)
 

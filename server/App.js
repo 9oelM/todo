@@ -10,16 +10,19 @@ import Cors from 'cors'
 
 // Internal
 import routes from './routes/index'
-
+/*
 const db = Mongoose.connection
 db.on('error', console.error)
 db.once('open', () => {
     console.log('Connected to mongodb server')
-})
+})*/
 Mongoose.Promise = global.Promise
-const dbUrl = 'mongodb://localhost:27017/todo'
+const dbUrl =
+    'mongodb+srv://admin:6gwIYYE5Nwpp7CYM@cluster0-nb3lv.mongodb.net/todo?retryWrites=true'
 Mongoose.connect(dbUrl, { useNewUrlParser: true })
-    .then(() => console.log(`Connected to ${dbUrl}`))
+    .then(() => {
+        console.log(`Connected to ${dbUrl}`)
+    })
     .catch(e => console.error(e))
 
 const app = Express()
