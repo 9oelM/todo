@@ -4,7 +4,7 @@ todo front &amp; back
 
 ## URLS
 - Backend: now.sh + mlab (all free). **[Link](https://zeit.co/joelmun/server/7lcnc0mco/logs)**
-- Frontend: [github](https://9oelm.github.io/todo) or [netlify](https://joel-todos.netlify.com/)
+- Frontend: [Netlify](https://joel-todos.netlify.com/)
 
 ## Stacks
 
