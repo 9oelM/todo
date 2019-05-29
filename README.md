@@ -25,16 +25,6 @@ todo front &amp; back
 
 ## How to install & build
 
-### Before you go on (Important!!!)
-
-- The backend server runs only for an HTTP. But the frontend runs on HTTPS. In modern browsers, you may get this warning accessing [the demo page](https://joel-todos.netlify.com/) like this:
-
-![warning message](./warning.PNG)
-
-Then simply click on **'load unsafe script' (안전하지 않은 스크립트 로드).**
-
-Then the app will run properly.
-
 ### Basic setup
 
 Note: this setup was tried out on Ubuntu LTS 18.04
