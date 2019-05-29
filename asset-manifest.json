@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/todo/static/css/main.760391f1.chunk.css",
-    "main.js": "/todo/static/js/main.089fa8e0.chunk.js",
-    "main.js.map": "/todo/static/js/main.089fa8e0.chunk.js.map",
-    "runtime~main.js": "/todo/static/js/runtime~main.7a2dc5ec.js",
-    "runtime~main.js.map": "/todo/static/js/runtime~main.7a2dc5ec.js.map",
-    "static/css/2.fcee8749.chunk.css": "/todo/static/css/2.fcee8749.chunk.css",
-    "static/js/2.6af5fbb7.chunk.js": "/todo/static/js/2.6af5fbb7.chunk.js",
-    "static/js/2.6af5fbb7.chunk.js.map": "/todo/static/js/2.6af5fbb7.chunk.js.map",
-    "index.html": "/todo/index.html",
-    "precache-manifest.c409b783056c20f0e35098a9d9d458eb.js": "/todo/precache-manifest.c409b783056c20f0e35098a9d9d458eb.js",
-    "service-worker.js": "/todo/service-worker.js",
-    "static/css/2.fcee8749.chunk.css.map": "/todo/static/css/2.fcee8749.chunk.css.map",
-    "static/css/main.760391f1.chunk.css.map": "/todo/static/css/main.760391f1.chunk.css.map",
-    "static/media/roboto-fontface.css": "/todo/static/media/Roboto-ThinItalic.8a96edbb.woff"
+    "main.css": "./static/css/main.760391f1.chunk.css",
+    "main.js": "./static/js/main.ce57643f.chunk.js",
+    "main.js.map": "./static/js/main.ce57643f.chunk.js.map",
+    "runtime~main.js": "./static/js/runtime~main.d653cc00.js",
+    "runtime~main.js.map": "./static/js/runtime~main.d653cc00.js.map",
+    "static/css/2.9149de37.chunk.css": "./static/css/2.9149de37.chunk.css",
+    "static/js/2.d8ff4853.chunk.js": "./static/js/2.d8ff4853.chunk.js",
+    "static/js/2.d8ff4853.chunk.js.map": "./static/js/2.d8ff4853.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.3f30c7040b1ed12618b550524ff9736e.js": "./precache-manifest.3f30c7040b1ed12618b550524ff9736e.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/2.9149de37.chunk.css.map": "./static/css/2.9149de37.chunk.css.map",
+    "static/css/main.760391f1.chunk.css.map": "./static/css/main.760391f1.chunk.css.map",
+    "static/media/roboto-fontface.css": "./static/media/Roboto-ThinItalic.8a96edbb.woff"
   }
 }
