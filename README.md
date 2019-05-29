@@ -2,6 +2,10 @@
 
 todo front &amp; back
 
+## URLS
+- Backend: now.sh + mlab (all free). **[Link](https://zeit.co/joelmun/server/abflx4awj/logs)**
+- Frontend: [github](https://9oelm.github.io/todo) or [netlify](https://joel-todos.netlify.com/)
+
 ## Stacks
 
 ### Client
@@ -182,25 +186,6 @@ screen -ls | grep pts | cut -d. -f1 | awk '{print $1}' | xargs kill
 
 ```
 $ yarn start|lint
-```
-
-## Etc (for myself)
-
-Front dev (AWS)
-
-```
-https://5d2fbf9bed8b47c7abc49447f8d8f150.vfs.cloud9.us-east-1.amazonaws.com/
-```
-
-Server dev (GCP)
-
-```
-http://35.208.190.165:8081/
-```
-
-[Check the server running on GCP](http://35.208.190.165:8081/)
-```
-http://35.208.190.165:8081/
 ```
 
 ## 요구사항
