@@ -19,7 +19,7 @@
         "forever": "^1.0.0",
         "https": "^1.0.0",
         "keymirror": "^0.1.1",
-        "mongoose": "^5.5.10",
+        "mongoose": "^5.7.5",
         "prettier": "^1.17.1"
     },
     "devDependencies": {
